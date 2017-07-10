@@ -11,7 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     var count = 0
+    var count2 = 0
     var label:UILabel!
+    var label2:UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,12 @@ class ViewController: UIViewController {
         self.view.addSubview(label)
         self.label = label
         
+        var label2 = UILabel()
+        label2.frame = CGRect.init(x: 180, y: 180, width: 60, height: 60)
+        label2.text = "0"
+        self.view.addSubview(label2)
+        self.label2 = label
+        
         var button = UIButton()
         button.frame = CGRect.init(x: 150, y: 250, width: 60, height: 60)
         button.setTitle("Click", for: .normal)
@@ -31,6 +39,7 @@ class ViewController: UIViewController {
         self.view.addSubview(button)
         
         button.addTarget(self, action: #selector(ViewController.incrementCount), for: UIControlEvents.touchUpInside)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,8 +48,10 @@ class ViewController: UIViewController {
     }
     //MARK: Incrementation
     func incrementCount() {
-        self.count+1
+        self.count += 1
+        self.count2 += 1
         self.label.text = "\(self.count)"
+        self.label2.text = "\(self.count2)"
     }
 
 
