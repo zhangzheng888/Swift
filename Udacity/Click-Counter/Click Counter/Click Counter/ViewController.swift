@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var count = 0
+    var label:UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +22,7 @@ class ViewController: UIViewController {
         label.frame = CGRect.init(x: 150, y: 150, width: 60, height: 60)
         label.text = "0"
         self.view.addSubview(label)
+        self.label = label
         
         var button = UIButton()
         button.frame = CGRect.init(x: 150, y: 250, width: 60, height: 60)
@@ -31,7 +35,11 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    //MARK: Incrementation
+    func incrementCount() {
+        self.count+1
+        self.label.text = "\(self.count)"
+    }
 
 
 }
-
