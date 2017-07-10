@@ -7,14 +7,14 @@
     "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : 9223372036854775807,
     "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1ED2661B-253E-4445-B018-D4BBA33222AD",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "92FEF281-7693-4506-B214-FB83B4A6DF9F",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : "Swift\/",
     "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ColorMaker",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Udacity\/ios-nd-uikit-swift-3\/step1.1-colorMaker-incomplete\/ColorMaker.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Udacity\/ios-nd-uikit-swift-3\/step1.4-colorError3\/ColorMaker.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Swift.git",
