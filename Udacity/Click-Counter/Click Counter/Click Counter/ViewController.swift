@@ -30,15 +30,23 @@ class ViewController: UIViewController {
         label2.frame = CGRect.init(x: 180, y: 180, width: 60, height: 60)
         label2.text = "0"
         self.view.addSubview(label2)
-        self.label2 = label
+        self.label2 = label2
         
         var button = UIButton()
         button.frame = CGRect.init(x: 150, y: 250, width: 60, height: 60)
-        button.setTitle("Click", for: .normal)
+        button.setTitle("Click to +", for: .normal)
         button.setTitleColor(UIColor.blue, for: .normal)
         self.view.addSubview(button)
         
         button.addTarget(self, action: #selector(ViewController.incrementCount), for: UIControlEvents.touchUpInside)
+        
+        var button2 = UIButton()
+        button2.frame = CGRect.init(x: 210, y: 300, width: 60, height: 60)
+        button2.setTitle("Click to -", for: .normal)
+        button2.setTitleColor(UIColor.red, for: .normal)
+        self.view.addSubview(button2)
+        
+        button2.addTarget(self, action: #selector(ViewController.decrementCount), for: UIControlEvents.touchUpInside)
 
     }
 
@@ -53,6 +61,12 @@ class ViewController: UIViewController {
         self.label.text = "\(self.count)"
         self.label2.text = "\(self.count2)"
     }
-
+    //MARK: Decrementation
+    func decrementCount() {
+        self.count -= 1
+        self.count2 -= 1
+        self.label.text = "\(self.count)"
+        self.label2.text = "\(self.count2)"
+    }
 
 }
