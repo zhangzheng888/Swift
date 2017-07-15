@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : 9223372036854775807,
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FA5F07EF-92D8-4232-974B-6BC8787A1FD3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : "Swift\/",
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Dice Incomplete",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Udacity\/ios-nd-uikit-swift-3\/step2.1-dice-incomplete\/Dice Incomplete.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Java.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81"
+    }
+  ]
+}

@@ -14,7 +14,7 @@ class DiceViewController: UIViewController {
 
     // MARK: Properties
     
-    var firstValue: Int?
+    var firstValue: Int? //wrapped optional, can be nil
     var secondValue: Int?
     
     // MARK: Outlets
