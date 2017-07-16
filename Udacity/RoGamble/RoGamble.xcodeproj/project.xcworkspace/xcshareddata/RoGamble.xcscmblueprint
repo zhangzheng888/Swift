@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : 9223372036854775807,
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6543A4C7-9F87-4BBC-931D-D97FF1D84C70",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : "Swift\/",
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RoGamble",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Udacity\/RoGamble\/RoGamble.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Java.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81"
+    }
+  ]
+}
