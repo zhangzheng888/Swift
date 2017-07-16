@@ -12,6 +12,7 @@
 		E936E92A1F1AE74200C9EAF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E936E9281F1AE74200C9EAF0 /* Main.storyboard */; };
 		E936E92C1F1AE74200C9EAF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E936E92B1F1AE74200C9EAF0 /* Assets.xcassets */; };
 		E936E92F1F1AE74200C9EAF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E936E92D1F1AE74200C9EAF0 /* LaunchScreen.storyboard */; };
+		E936E9371F1AECD800C9EAF0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E936E9361F1AECD700C9EAF0 /* ResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		E936E92B1F1AE74200C9EAF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E936E92E1F1AE74200C9EAF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E936E9301F1AE74200C9EAF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E936E9361F1AECD700C9EAF0 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				E936E9241F1AE74200C9EAF0 /* AppDelegate.swift */,
 				E936E9261F1AE74200C9EAF0 /* ViewController.swift */,
+				E936E9361F1AECD700C9EAF0 /* ResultViewController.swift */,
 				E936E9281F1AE74200C9EAF0 /* Main.storyboard */,
 				E936E92B1F1AE74200C9EAF0 /* Assets.xcassets */,
 				E936E92D1F1AE74200C9EAF0 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			files = (
 				E936E9271F1AE74200C9EAF0 /* ViewController.swift in Sources */,
 				E936E9251F1AE74200C9EAF0 /* AppDelegate.swift in Sources */,
+				E936E9371F1AECD800C9EAF0 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
