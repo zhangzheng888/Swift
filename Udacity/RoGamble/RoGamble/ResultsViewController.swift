@@ -11,11 +11,16 @@ import UIKit
 
 class ResultsViewController: UIViewController {
     
+    //MARK: - Properties
+    
+    @IBOutlet weak var resultImage: UIImageView!
+    @IBOutlet weak var messageLabel: UILabel!
+    
     var myHand : Int?
     var opponentHand : Int?
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         // Determine what image and message to display
         let play = (myHand!, opponentHand!)
         switch play {
@@ -50,6 +55,13 @@ class ResultsViewController: UIViewController {
             resultImage.image = nil
             messageLabel.text = "..."
         }
+    }
+    
+    /**
+     *    dismiss this view controller
+     */
+    @IBAction func dismiss() {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
