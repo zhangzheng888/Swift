@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  RoGamble
 //
-//  Created by kevin zhang on 7/15/17.
+//  Created by kevin zhang on 7/17/17.
 //  Copyright © 2017 iOS. All rights reserved.
 //
 

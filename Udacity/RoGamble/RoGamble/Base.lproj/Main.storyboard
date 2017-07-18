@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,57 +18,49 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ih0-ec-Br7" userLabel="Paper">
-                                <rect key="frame" x="199" y="175" width="75" height="65"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8T1-gL-NUT" userLabel="Rock">
+                                <rect key="frame" x="164" y="280" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="paper"/>
+                                <state key="normal" title="Button"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLc-4R-ESZ" userLabel="Rock">
-                                <rect key="frame" x="46" y="175" width="74" height="65"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY1-oE-Fhc" userLabel="Paper">
+                                <rect key="frame" x="164" y="318" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="rock"/>
+                                <state key="normal" title="Button"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVG-vO-p7l" userLabel="Scissor">
-                                <rect key="frame" x="122.5" y="252" width="75" height="65"/>
-                                <state key="normal" image="scissors"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3M-Mp-AsJ" userLabel="Scissor">
+                                <rect key="frame" x="164" y="356" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="HVG-vO-p7l" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="H7D-4z-wME"/>
-                            <constraint firstItem="HVG-vO-p7l" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lAt-ty-hCu"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="118.125" y="123.59154929577466"/>
+            <point key="canvasLocation" x="-22" y="128"/>
         </scene>
-        <!--Result View Controller-->
-        <scene sceneID="ZQB-0a-0pi">
+        <!--Results View Controller-->
+        <scene sceneID="fSZ-Eb-NLD">
             <objects>
-                <viewController storyboardIdentifier="ResultViewController" id="PMp-gs-ezt" customClass="ResultViewController" customModule="RoGamble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CgT-k7-J6O" userLabel="Results View Controller" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="R9O-nK-uaY"/>
-                        <viewControllerLayoutGuide type="bottom" id="krH-wV-QDW"/>
+                        <viewControllerLayoutGuide type="top" id="qNM-jt-f9k"/>
+                        <viewControllerLayoutGuide type="bottom" id="r0O-Dx-5FF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6tP-XT-K37">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" contentMode="scaleToFill" id="vHG-XQ-0z3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ThV-HV-Dtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uwi-WD-cER" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="827" y="124"/>
+            <point key="canvasLocation" x="456" y="128"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="paper" width="75" height="65"/>
-        <image name="rock" width="75" height="65"/>
-        <image name="scissors" width="75" height="65"/>
-    </resources>
 </document>
