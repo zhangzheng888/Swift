@@ -64,7 +64,7 @@ class ResultsViewController: UIViewController {
         // Determine what image and message to display
         
         let play = (myHand!, opponentHand!)
-        let kevin = myHand
+        // let kevin = myHand
         switch play {
         case (1,1):
             resultsImageView.image = UIImage(named: "ItsATie")
