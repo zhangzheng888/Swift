@@ -8,29 +8,44 @@
 
 import UIKit
 
+enum Choice: Int {
+    case Rock = 1, Paper, Scissors
+}
+
 class ViewController: UIViewController {
     
-    /**
-     * Randomly generates a Int from 1 to 3
-     */
-    func randomHandValue() -> Int {
-        // Generate a random Int32 using arc4Random
-        let randomValue = 1 + arc4random() % 3
-        
-        // Return a more convenient Int, initialized with the random value
-        return Int(randomValue)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func rockPressed(sender: UIButton) {
+        
+        // Code Only
+        let resultsViewController: ResultsViewController = self.storyboard?.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
+        
+        resultsViewController.userChoice = Choice.Rock
+        
+        self.present(resultsViewController, animated: true, completion: nil)
+        
     }
-
-
+    
+    @IBAction func paperPressed(sender: UIButton) {
+        // Code & Segue
+        performSegue(withIdentifier: "paperSelected", sender: self)
+    }
+        //Segue Only
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let resultsViewController: ResultsViewController = segue.destination as! ResultsViewController
+        
+        if segue.identifier == "scissorsSelected" {
+            resultsViewController.userChoice = Choice.Scissors
+        }
+        else if segue.identifier == "paperSelected" {
+            resultsViewController.userChoice = Choice.Paper
+        }
+    }
 }
 
