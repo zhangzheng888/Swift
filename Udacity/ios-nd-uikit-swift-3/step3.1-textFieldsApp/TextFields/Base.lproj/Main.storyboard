@@ -65,23 +65,68 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter zip code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nWU-Eq-zww" userLabel="Text Field 5">
+                                <rect key="frame" x="16" y="274" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QjV-jk-zwq"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fMa-h9-ev9" userLabel="Text Field 6">
+                                <rect key="frame" x="16" y="312" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Obb-eY-d10"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Turn on to unlock" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iov-QA-GE2" userLabel="Text Field 7">
+                                <rect key="frame" x="16" y="350" width="286" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1ak-EL-qhw"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfN-2w-Mxe">
+                                <rect key="frame" x="310" y="350" width="51" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="rO8-69-KmW"/>
+                                </constraints>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.58709395559210531" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="b5d-35-VHU" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="21H-QM-esp"/>
                             <constraint firstItem="b5d-35-VHU" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="CDF-pd-P9F"/>
+                            <constraint firstItem="fMa-h9-ev9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ElF-9I-Fx0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fMa-h9-ev9" secondAttribute="trailing" id="F4f-SU-Qsc"/>
+                            <constraint firstItem="cfN-2w-Mxe" firstAttribute="leading" secondItem="Iov-QA-GE2" secondAttribute="trailing" constant="8" id="G5k-Yp-YOl"/>
+                            <constraint firstItem="nWU-Eq-zww" firstAttribute="top" secondItem="fNd-cU-qLO" secondAttribute="bottom" constant="8" id="G6U-jk-CqF"/>
                             <constraint firstItem="FND-fQ-FKU" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="MX8-Wf-RzC"/>
+                            <constraint firstItem="cfN-2w-Mxe" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="NRu-8p-GG5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fNd-cU-qLO" secondAttribute="trailing" id="PTr-KD-c28"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nWU-Eq-zww" secondAttribute="trailing" id="Ug2-GF-7Em"/>
                             <constraint firstItem="x8x-lW-EqZ" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="YuR-vl-4bl"/>
                             <constraint firstItem="b5d-35-VHU" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Zte-LW-xA1"/>
                             <constraint firstItem="x8x-lW-EqZ" firstAttribute="top" secondItem="FND-fQ-FKU" secondAttribute="bottom" constant="8" id="a5T-bo-Ks8"/>
+                            <constraint firstItem="cfN-2w-Mxe" firstAttribute="leading" secondItem="Iov-QA-GE2" secondAttribute="trailing" constant="8" id="abv-FS-blv"/>
+                            <constraint firstItem="fMa-h9-ev9" firstAttribute="top" secondItem="nWU-Eq-zww" secondAttribute="bottom" constant="8" id="f7y-cp-PE2"/>
                             <constraint firstItem="fNd-cU-qLO" firstAttribute="top" secondItem="vX4-tH-Tjk" secondAttribute="bottom" constant="29" id="fzE-uF-jZy"/>
                             <constraint firstAttribute="centerX" secondItem="vX4-tH-Tjk" secondAttribute="centerX" id="gm5-EE-q6d"/>
                             <constraint firstItem="vX4-tH-Tjk" firstAttribute="top" secondItem="x8x-lW-EqZ" secondAttribute="bottom" constant="29" id="hvZ-Rg-29s"/>
+                            <constraint firstItem="nWU-Eq-zww" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="icd-18-Gmd"/>
                             <constraint firstItem="FND-fQ-FKU" firstAttribute="top" secondItem="b5d-35-VHU" secondAttribute="bottom" constant="8" id="juk-Pm-vD8"/>
                             <constraint firstItem="x8x-lW-EqZ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="k04-Jr-pgf"/>
                             <constraint firstItem="FND-fQ-FKU" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="oAk-yx-rSh"/>
+                            <constraint firstItem="cfN-2w-Mxe" firstAttribute="top" secondItem="fMa-h9-ev9" secondAttribute="bottom" constant="8" id="qIo-sb-Jro"/>
                             <constraint firstItem="fNd-cU-qLO" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="vMF-A1-NGq"/>
+                            <constraint firstItem="Iov-QA-GE2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="y58-VY-yuU"/>
+                            <constraint firstItem="Iov-QA-GE2" firstAttribute="top" secondItem="fMa-h9-ev9" secondAttribute="bottom" constant="8" id="yFx-xU-B6t"/>
                         </constraints>
                     </view>
                     <connections>
