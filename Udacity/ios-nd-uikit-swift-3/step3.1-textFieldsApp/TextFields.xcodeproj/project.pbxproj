@@ -15,6 +15,9 @@
 		4D08C4901A126EC400A95F43 /* EmojiTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D08C48F1A126EC400A95F43 /* EmojiTextFieldDelegate.swift */; };
 		4D08C4921A12860200A95F43 /* ColorizerTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D08C4911A12860200A95F43 /* ColorizerTextFieldDelegate.swift */; };
 		E974CC641F214B7D00F9178D /* RandomColorTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E974CC631F214B7C00F9178D /* RandomColorTextFieldDelegate.swift */; };
+		E974CC661F215ED900F9178D /* ZipCodeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E974CC651F215ED900F9178D /* ZipCodeTextFieldDelegate.swift */; };
+		E974CC681F215EF100F9178D /* CashTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E974CC671F215EF100F9178D /* CashTextFieldDelegate.swift */; };
+		E974CC6A1F215F0200F9178D /* LockableTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E974CC691F215F0200F9178D /* LockableTextFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		4D08C48F1A126EC400A95F43 /* EmojiTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTextFieldDelegate.swift; sourceTree = "<group>"; };
 		4D08C4911A12860200A95F43 /* ColorizerTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorizerTextFieldDelegate.swift; sourceTree = "<group>"; };
 		E974CC631F214B7C00F9178D /* RandomColorTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomColorTextFieldDelegate.swift; sourceTree = "<group>"; };
+		E974CC651F215ED900F9178D /* ZipCodeTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipCodeTextFieldDelegate.swift; sourceTree = "<group>"; };
+		E974CC671F215EF100F9178D /* CashTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CashTextFieldDelegate.swift; sourceTree = "<group>"; };
+		E974CC691F215F0200F9178D /* LockableTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockableTextFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,9 @@
 				4D08C48F1A126EC400A95F43 /* EmojiTextFieldDelegate.swift */,
 				4D08C4911A12860200A95F43 /* ColorizerTextFieldDelegate.swift */,
 				E974CC631F214B7C00F9178D /* RandomColorTextFieldDelegate.swift */,
+				E974CC651F215ED900F9178D /* ZipCodeTextFieldDelegate.swift */,
+				E974CC671F215EF100F9178D /* CashTextFieldDelegate.swift */,
+				E974CC691F215F0200F9178D /* LockableTextFieldDelegate.swift */,
 			);
 			name = "Text Field Delegates";
 			sourceTree = "<group>";
@@ -162,7 +171,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E974CC681F215EF100F9178D /* CashTextFieldDelegate.swift in Sources */,
 				4D08C4921A12860200A95F43 /* ColorizerTextFieldDelegate.swift in Sources */,
+				E974CC661F215ED900F9178D /* ZipCodeTextFieldDelegate.swift in Sources */,
+				E974CC6A1F215F0200F9178D /* LockableTextFieldDelegate.swift in Sources */,
 				4D08C4721A126D0300A95F43 /* ViewController.swift in Sources */,
 				4D08C4701A126D0300A95F43 /* AppDelegate.swift in Sources */,
 				4D08C4901A126EC400A95F43 /* EmojiTextFieldDelegate.swift in Sources */,
