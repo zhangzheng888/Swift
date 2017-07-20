@@ -17,6 +17,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField2: UITextField!
     @IBOutlet weak var textField3: UITextField!
     @IBOutlet weak var characterCountLabel: UILabel!
+    @IBOutlet weak var textField4: UITextField!
+    
     
     // MARK: Text Field Delegate objects
     let emojiDelegate = EmojiTextFieldDelegate()
@@ -36,6 +38,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //self.textField2.delegate = colorizerDelegate
         self.textField2.delegate = randomcolorDelegate
         self.textField3.delegate = self
+        self.textField4.delegate = colorizerDelegate
     }
     
     // MARK: Text Field Delegate Methods
