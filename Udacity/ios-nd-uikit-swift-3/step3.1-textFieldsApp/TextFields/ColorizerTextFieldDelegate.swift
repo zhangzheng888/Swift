@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Udacity. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 // MARK: - ColorizerTextFieldDelegate: NSObject, UITextFieldDelegate

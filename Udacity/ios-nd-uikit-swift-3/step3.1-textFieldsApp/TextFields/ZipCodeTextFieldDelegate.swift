@@ -22,7 +22,7 @@ class ZipCodeTextFieldDelegate: NSObject, UITextFieldDelegate {
         // this method, as written, creates a new string that replaces the last character (empty) at the end with the character that was just entered into the textField
         print("string is \(string)")
         print("newText is \(newText)")
-        print("textField text is \(textField.text)")
+        print("textField text is \(String(describing: textField.text))")
         
         return match.location == 0//newText.length <= 5
     }
