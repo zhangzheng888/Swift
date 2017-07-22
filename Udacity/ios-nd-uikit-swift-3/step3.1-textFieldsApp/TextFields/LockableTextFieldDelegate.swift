@@ -11,4 +11,19 @@ import UIKit
 
 class LockableTextFieldDelegate: NSObject, UITextFieldDelegate {
 
+//    var lockSwitch: UISwitch!
+//    
+//    init ( lockSwitch: UISwitch )
+//    {
+//        self.lockSwitch = lockSwitch;
+//        super.init()
+//    }
+//    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+//    { return lockSwitch.isOn }
+//    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
 }

@@ -97,6 +97,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="rO8-69-KmW"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="switchToggledWithSender:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Lot-50-fIW"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.58709395559210531" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

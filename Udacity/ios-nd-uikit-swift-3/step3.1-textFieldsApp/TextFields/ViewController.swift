@@ -23,13 +23,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField7: UITextField!
     @IBOutlet weak var enableTextField: UISwitch!
     
+    // Variables
+    var timer: Timer!
+    
     // MARK: Text Field Delegate objects
     let emojiDelegate = EmojiTextFieldDelegate()
     let colorizerDelegate = ColorizerTextFieldDelegate()
     let randomcolorDelegate = RandomColorTextFieldDelegate()
     let zipcodeDelegate = ZipCodeTextFieldDelegate()
     let cashDelegate = CashTextFieldDelegate()
-    let lockableDelegate = LockableTextFieldDelegate()
+//    let lockableDelegate = LockableTextFieldDelegate(lockSwitch: UISwitch)
     
     // MARK: Life Cycle
     
@@ -46,8 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.textField4.delegate = colorizerDelegate
         self.textField5.delegate = zipcodeDelegate
         self.textField6.delegate = cashDelegate
-        self.textField7.delegate = lockableDelegate
-        
+        self.textField7.delegate = self
     }
     
     // MARK: Text Field Delegate Methods
@@ -64,8 +66,63 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Write the length of newText into the label
         self.characterCountLabel.text = String(newText.length)
         
+        let randomColor = UIColor(red: randomCGFloat(), green: randomCGFloat(), blue: randomCGFloat(), alpha: 1.0)
+        self.view.backgroundColor = randomColor
+        
         // returning true gives the text field permission to change its text
         return true;
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        stopTimer()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true;
+    }
+    
+    func randomCGFloat() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
+    }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        textField.text = ""
+        
+        startTimer()
+        
+    }
+    
+    func updateBackgroundColor() {
+        
+        let randomColor = UIColor(red: randomCGFloat(), green: randomCGFloat(), blue: randomCGFloat(), alpha: 1.0)
+        
+        self.view.backgroundColor = randomColor
+        
+    }
+    
+    func startTimer() {
+        // Stop any (already) existing timer
+        if timer != nil {
+            timer.invalidate()
+        }
+        
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(ViewController.updateBackgroundColor), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer() {
+        // Stop any (already) existing timer
+        if timer != nil {
+            timer.invalidate()
+        }
+        
+    }
+    @IBAction func switchToggled(sender: UISwitch) {
+        textField7.isEnabled = sender.isOn
     }
     
 }
