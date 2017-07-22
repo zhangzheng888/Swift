@@ -131,12 +131,13 @@
                     </view>
                     <connections>
                         <outlet property="characterCountLabel" destination="vX4-tH-Tjk" id="aMf-he-o0G"/>
+                        <outlet property="enableTextField" destination="cfN-2w-Mxe" id="f0k-nj-XNc"/>
                         <outlet property="textField1" destination="b5d-35-VHU" id="JJa-zq-XKJ"/>
                         <outlet property="textField2" destination="FND-fQ-FKU" id="wKW-y7-Gz9"/>
                         <outlet property="textField3" destination="x8x-lW-EqZ" id="D4x-7k-BPl"/>
                         <outlet property="textField4" destination="fNd-cU-qLO" id="Pmg-nk-InM"/>
                         <outlet property="textField5" destination="nWU-Eq-zww" id="TN9-AX-oOT"/>
-                        <outlet property="textField6" destination="fMa-h9-ev9" id="ubJ-ll-I6y"/>
+                        <outlet property="textField6" destination="fMa-h9-ev9" id="gOH-Cc-KaZ"/>
                         <outlet property="textField7" destination="Iov-QA-GE2" id="gof-U3-hQh"/>
                     </connections>
                 </viewController>

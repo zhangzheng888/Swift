@@ -21,6 +21,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField5: UITextField!
     @IBOutlet weak var textField6: UITextField!
     @IBOutlet weak var textField7: UITextField!
+    @IBOutlet weak var enableTextField: UISwitch!
     
     // MARK: Text Field Delegate objects
     let emojiDelegate = EmojiTextFieldDelegate()
@@ -66,5 +67,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // returning true gives the text field permission to change its text
         return true;
     }
+    
 }
 
