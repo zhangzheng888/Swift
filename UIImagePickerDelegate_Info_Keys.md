@@ -6,7 +6,7 @@
 
 ### Keys for the editing information dictionary passed to the delegate.
 
-##<b>Topics</b>
+##Topics
 
 | Constants        |           | 
 | ------------- |-------------:|
