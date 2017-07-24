@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MemeU 1.0
 //
-//  Created by kevin zhang on 7/22/17.
+//  Created by kevin zhang on 7/24/17.
 //  Copyright © 2017 iOS. All rights reserved.
 //
 

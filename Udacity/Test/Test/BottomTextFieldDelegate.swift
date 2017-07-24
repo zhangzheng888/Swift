@@ -5,5 +5,14 @@
 //  Created by kevin zhang on 7/22/17.
 //  Copyright © 2017 iOS. All rights reserved.
 //
+import UIKit
 
-import Foundation
+class BottomTextFieldDelegate: NSObject, UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}

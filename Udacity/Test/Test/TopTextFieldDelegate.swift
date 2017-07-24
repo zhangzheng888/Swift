@@ -6,4 +6,14 @@
 //  Copyright © 2017 iOS. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class TopTextFieldDelegate: NSObject, UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}

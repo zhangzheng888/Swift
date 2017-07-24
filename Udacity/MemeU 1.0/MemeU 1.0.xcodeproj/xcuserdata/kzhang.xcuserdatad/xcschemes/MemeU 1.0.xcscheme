@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E9AA29811F23BB91005CF922"
+               BlueprintIdentifier = "E9ADDD371F267BE70048ED4A"
                BuildableName = "MemeU 1.0.app"
                BlueprintName = "MemeU 1.0"
                ReferencedContainer = "container:MemeU 1.0.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9AA29811F23BB91005CF922"
+            BlueprintIdentifier = "E9ADDD371F267BE70048ED4A"
             BuildableName = "MemeU 1.0.app"
             BlueprintName = "MemeU 1.0"
             ReferencedContainer = "container:MemeU 1.0.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9AA29811F23BB91005CF922"
+            BlueprintIdentifier = "E9ADDD371F267BE70048ED4A"
             BuildableName = "MemeU 1.0.app"
             BlueprintName = "MemeU 1.0"
             ReferencedContainer = "container:MemeU 1.0.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9AA29811F23BB91005CF922"
+            BlueprintIdentifier = "E9ADDD371F267BE70048ED4A"
             BuildableName = "MemeU 1.0.app"
             BlueprintName = "MemeU 1.0"
             ReferencedContainer = "container:MemeU 1.0.xcodeproj">
