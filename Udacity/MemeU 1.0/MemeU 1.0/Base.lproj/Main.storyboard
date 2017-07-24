@@ -21,15 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGo-FE-mN5" userLabel="Top Toolbar">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="action" id="Mcx-xg-BvB"/>
-                                </items>
-                            </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="im1-vZ-be2">
-                                <rect key="frame" x="0.0" y="74" width="320" height="440"/>
-                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cv6-R1-SMe" userLabel="Bottom Toolbar">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items>
@@ -45,16 +36,50 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGo-FE-mN5" userLabel="Top Toolbar">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="Mcx-xg-BvB"/>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="im1-vZ-be2">
+                                <rect key="frame" x="0.0" y="74" width="320" height="440"/>
+                                <color key="backgroundColor" red="0.58709395559999999" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Bottom Text Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F6n-0i-oOw" userLabel="Bottom Text Field">
+                                <rect key="frame" x="0.0" y="484" width="320" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="hbm-5n-Wf7"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Top Text Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7SP-Th-jFv" userLabel="Top Text Field">
+                                <rect key="frame" x="0.0" y="74" width="320" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="eLy-ms-La9"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7SP-Th-jFv" secondAttribute="trailing" id="95D-o7-Z0z"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Cv6-R1-SMe" secondAttribute="bottom" id="AVv-RZ-WkK"/>
                             <constraint firstAttribute="trailing" secondItem="im1-vZ-be2" secondAttribute="trailing" id="CbG-rG-sn7"/>
                             <constraint firstItem="jGo-FE-mN5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Dnh-2r-tE6"/>
+                            <constraint firstAttribute="trailing" secondItem="F6n-0i-oOw" secondAttribute="trailing" id="L8N-Qj-TJa"/>
                             <constraint firstAttribute="trailing" secondItem="Cv6-R1-SMe" secondAttribute="trailing" id="b4t-vF-Wvn"/>
                             <constraint firstItem="Cv6-R1-SMe" firstAttribute="top" secondItem="im1-vZ-be2" secondAttribute="bottom" constant="10" id="euO-DS-lU1"/>
+                            <constraint firstItem="7SP-Th-jFv" firstAttribute="top" secondItem="jGo-FE-mN5" secondAttribute="bottom" constant="10" id="fti-Nj-kEQ"/>
                             <constraint firstItem="Cv6-R1-SMe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="geI-kT-Mmo"/>
                             <constraint firstItem="im1-vZ-be2" firstAttribute="top" secondItem="jGo-FE-mN5" secondAttribute="bottom" constant="10" id="gk9-36-dFh"/>
+                            <constraint firstItem="Cv6-R1-SMe" firstAttribute="top" secondItem="F6n-0i-oOw" secondAttribute="bottom" constant="10" id="gma-AA-orb"/>
+                            <constraint firstItem="7SP-Th-jFv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jom-2O-SF2"/>
+                            <constraint firstItem="F6n-0i-oOw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="upP-tc-y2u"/>
                             <constraint firstItem="im1-vZ-be2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vx6-yv-0PU"/>
                             <constraint firstAttribute="trailing" secondItem="jGo-FE-mN5" secondAttribute="trailing" id="yxS-PA-ro6"/>
                             <constraint firstItem="jGo-FE-mN5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zv4-CF-gov"/>
@@ -71,6 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="33.75" y="35.91549295774648"/>
         </scene>
     </scenes>
 </document>
