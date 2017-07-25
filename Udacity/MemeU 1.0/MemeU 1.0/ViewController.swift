@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
+class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
     // MARK: - UI Properties
@@ -30,8 +30,7 @@ UINavigationControllerDelegate {
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName: NSNumber (value: -4.0)]
     
-    let topTextFieldDelegate = TopTextFieldDelegate()
-    let bottomTextFieldDelegate = BottomTextFieldDelegate()
+    let customTextFieldDelegate = CustomTextFieldDelegate()
     
     func initializeTextFields (textField: UITextField, delegate: UITextFieldDelegate) {
         textField.defaultTextAttributes = memeTextAttributes
@@ -69,8 +68,8 @@ UINavigationControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         shareButton.isEnabled = false
-        initializeTextFields(textField: topTextField, delegate: topTextFieldDelegate)
-        initializeTextFields(textField: bottomTextField, delegate: bottomTextFieldDelegate)
+        initializeTextFields(textField: topTextField, delegate: customTextFieldDelegate)
+        initializeTextFields(textField: bottomTextField, delegate: customTextFieldDelegate)
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,20 +91,21 @@ UINavigationControllerDelegate {
     // MARK: - Image Selection
     
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
-        present(imagePicker, animated: true, completion: nil)
-        shareButton.isEnabled = true
+        imageSelection(sourceType: UIImagePickerControllerSourceType.photoLibrary)
     }
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        imageSelection(sourceType: UIImagePickerControllerSourceType.camera)
+    }
+    
+    func imageSelection (sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = sourceType
+        imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
         shareButton.isEnabled = true
+    
     }
     
     // MARK: - Share Image Function
@@ -139,11 +139,15 @@ UINavigationControllerDelegate {
     // MARK: - Keyboard Appearance
     
     func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if bottomTextField.isFirstResponder {
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
     
     func keyboardWillHide(_ notification:Notification) {
-        view.frame.origin.y = 0.0
+        if bottomTextField.isFirstResponder {
+            view.frame.origin.y = 0.0
+        }
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -155,13 +159,13 @@ UINavigationControllerDelegate {
     // MARK: - Keyboard Notification
     
     func subscribeToKeyboardNotifications() {
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillShow, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
-        
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
 }

@@ -92,7 +92,7 @@
                         <outlet property="bottomTextField" destination="F6n-0i-oOw" id="ZDH-IQ-4On"/>
                         <outlet property="bottomToolBar" destination="Cv6-R1-SMe" id="R6E-1M-8zf"/>
                         <outlet property="cameraButton" destination="0L5-57-Ohy" id="3ux-eN-lyy"/>
-                        <outlet property="imagePickerView" destination="im1-vZ-be2" id="sPj-3e-jOa"/>
+                        <outlet property="imagePickerView" destination="im1-vZ-be2" id="Cwn-qW-T6U"/>
                         <outlet property="photoButton" destination="Vje-gc-rwn" id="nC6-fn-uOz"/>
                         <outlet property="shareButton" destination="Mcx-xg-BvB" id="Ncm-J9-ZNA"/>
                         <outlet property="topTextField" destination="7SP-Th-jFv" id="Ll4-6w-ebF"/>
