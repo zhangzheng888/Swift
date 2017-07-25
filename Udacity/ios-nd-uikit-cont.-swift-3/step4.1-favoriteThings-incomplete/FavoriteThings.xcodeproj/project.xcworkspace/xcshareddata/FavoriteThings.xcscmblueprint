@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : 9223372036854775807,
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4A89EBD7-B413-4E45-9603-44EDF1A6BE51",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : "Swift\/",
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FavoriteThings",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Udacity\/ios-nd-uikit-cont.-swift-3\/step4.1-favoriteThings-incomplete\/FavoriteThings.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Java.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81"
+    }
+  ]
+}

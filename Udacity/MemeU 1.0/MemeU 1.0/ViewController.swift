@@ -145,9 +145,7 @@ UINavigationControllerDelegate {
     }
     
     func keyboardWillHide(_ notification:Notification) {
-        if bottomTextField.isFirstResponder {
             view.frame.origin.y = 0.0
-        }
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -160,7 +158,7 @@ UINavigationControllerDelegate {
     
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
