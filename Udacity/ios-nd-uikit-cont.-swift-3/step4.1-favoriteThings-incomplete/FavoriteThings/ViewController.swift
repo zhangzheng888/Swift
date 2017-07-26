@@ -24,8 +24,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
         // TODO: Implement this method to get the correct row count
-        let placeholderCount = 2
-        return placeholderCount
+        //let placeholderCount = 2
+        return self.favoriteThings.count
     }
     
     // cell for row at index path
@@ -37,7 +37,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
       // 3. Set the images and labels in the cell with the data from the model object
       // 4. return the cell.
         
-        let placeholderCell = UITableViewCell()
-        return placeholderCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteThingCell") as! UITableViewCell
+        cell.textLabel?.text = self.favoriteThings[indexPath.row]
+        return cell
     }
 }
