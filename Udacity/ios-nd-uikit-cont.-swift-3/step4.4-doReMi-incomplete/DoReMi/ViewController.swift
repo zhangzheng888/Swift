@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     let model: [String] = [
         // TODO: Fill this array with data
+        "M3", "M4", "M5", "M6"
     ]
     
     // MARK: UITableViewDataSource
@@ -30,12 +31,14 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //TODO: Implement method to return the correct number of rows.
-        return 0
+        return self.model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //TODO: Implement method to return cell with the correct reuseidentifier and populated with the correct data.
-        let placeholderCell = UITableViewCell()
-        return placeholderCell
+        //let placeholderCell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCellReuseIdentifier") as! UITableViewCell
+        cell.textLabel?.text = self.model[indexPath.row]
+        return cell
     }
 }
