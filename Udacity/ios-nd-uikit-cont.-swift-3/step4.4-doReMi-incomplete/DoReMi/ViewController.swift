@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //TODO: Implement method to return cell with the correct reuseidentifier and populated with the correct data.
         //let placeholderCell = UITableViewCell()
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCellReuseIdentifier") as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCellReuseIdentifier")!
         cell.textLabel?.text = self.model[indexPath.row]
         return cell
     }
