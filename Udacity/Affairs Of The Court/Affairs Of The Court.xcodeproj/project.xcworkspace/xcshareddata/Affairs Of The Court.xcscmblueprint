@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : 9223372036854775807,
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F1D4F5E1-9268-4290-A7AB-3856CE161BC8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2DF93C70401B71533B1BC99AED2D06B8381FBAAF" : "Swift\/",
+    "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Affairs Of The Court",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Udacity\/Affairs Of The Court\/Affairs Of The Court.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2DF93C70401B71533B1BC99AED2D06B8381FBAAF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhangzheng888\/Java.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6130A2758A67ECD16A83241B2FA5D7E9E09D0A81"
+    }
+  ]
+}

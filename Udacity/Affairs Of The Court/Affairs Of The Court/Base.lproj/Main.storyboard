@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dBr-Tt-agF">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="eUp-8C-TxE">
+            <objects>
+                <navigationController id="dBr-Tt-agF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zi0-kO-d2Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Cae-gY-FoJ" kind="relationship" relationship="rootViewController" id="5qy-PB-lqh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kqI-eN-9bw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-114" y="123"/>
+        </scene>
+        <!--Part I: Choice of Romance-->
+        <scene sceneID="Xfg-pC-L8O">
+            <objects>
+                <viewController id="Cae-gY-FoJ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Af-KQ-mAv"/>
+                        <viewControllerLayoutGuide type="bottom" id="LtX-Ub-WLx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w0f-yB-PIe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPL-1y-S3X">
+                                <rect key="frame" x="16" y="518" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="I shout to to bring buckets of water."/>
+                                <connections>
+                                    <segue destination="TcH-99-S3K" kind="presentation" id="83L-ZI-wSq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCk-5e-2Hw">
+                                <rect key="frame" x="16" y="480" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="I rush into the barn to grab Francisco"/>
+                                <connections>
+                                    <segue destination="Kyx-8T-Xko" kind="presentation" id="Glb-Vr-nwP"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2MT-Qw-fsR">
+                                <rect key="frame" x="16" y="64" width="288" height="408"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">A high-pitched shriek splits the sweltering summer air: "Help! Oh, help, help!" 
+
+Your youngest sister Clara skids to a stop in front of you. "Francisco and I were playing in the barn!" she sobs. "He was showing me spells, and he set the hay on fire, and now–" 
+
+A breath of wind springs up, and the acrid scent of smoke reaches your nostrils. The barn is some ways away from your parents' villa and the vineyards–there's that. But it is full of hay for feeding the horses, and hay catches fire so fast–it would be so easy for the wooden barn to burn to the ground– </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Part I: Choice of Romance" id="0UQ-pF-Cdg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BJP-JR-kW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="691.875" y="122.53521126760563"/>
+        </scene>
+        <!--Part I: Choice of Romance-->
+        <scene sceneID="UNm-pT-szY">
+            <objects>
+                <viewController id="Kyx-8T-Xko" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7DB-ew-vIc"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Zh-Xx-rGf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vKe-SQ-U6f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NpH-5h-Kes">
+                                <rect key="frame" x="16" y="518" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="Cae-gY-FoJ" kind="presentation" id="c66-rt-vtl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCY-rD-fGq">
+                                <rect key="frame" x="16" y="480" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Next"/>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Cx0-KX-Qwv">
+                                <rect key="frame" x="16" y="64" width="288" height="408"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">You rip off your shirt–not very modest, but now is hardly the time for modesty–soak it in the water trough, and run into the barn. 
+
+It's like running into an oven. The flames are higher and hotter every second as they gobble down the stacks of hay. You use the wet shirt to beat aside the fire for just long enough to reach Francisco. Then you grab his hand and run, pulling him after you. Flames hiss in your ears and lick at your shoes, and both his clothing and yours is on fire when you stagger into the barnyard. The grooms are there by then; they grab Francisco and you and push you down into the dirt, smothering out the flames.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Part I: Choice of Romance" id="2fi-Nh-acn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N2Y-3v-odw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1721" y="-230"/>
+        </scene>
+        <!--Part I: Choice of Romance-->
+        <scene sceneID="QTP-Y2-qNG">
+            <objects>
+                <viewController id="TcH-99-S3K" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="17b-iu-899"/>
+                        <viewControllerLayoutGuide type="bottom" id="aeJ-Er-fmd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ofk-Y7-vXh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVi-dg-ZGu">
+                                <rect key="frame" x="16" y="518" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="Cae-gY-FoJ" kind="presentation" id="1oT-ZY-1Qc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Xa-cO-0Om">
+                                <rect key="frame" x="16" y="480" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Next"/>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vLj-gD-2UP">
+                                <rect key="frame" x="16" y="64" width="288" height="408"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">A high-pitched shriek splits the sweltering summer air: "Help! Oh, help, help!" 
+
+Your youngest sister Clara skids to a stop in front of you. "Francisco and I were playing in the barn!" she sobs. "He was showing me spells, and he set the hay on fire, and now–" 
+
+A breath of wind springs up, and the acrid scent of smoke reaches your nostrils. The barn is some ways away from your parents' villa and the vineyards–there's that. But it is full of hay for feeding the horses, and hay catches fire so fast–it would be so easy for the wooden barn to burn to the ground– </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Part I: Choice of Romance" id="h4G-uj-ndJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EBr-gf-vgi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1719" y="601"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5qy-PB-lqh"/>
+    </inferredMetricsTieBreakers>
+</document>
