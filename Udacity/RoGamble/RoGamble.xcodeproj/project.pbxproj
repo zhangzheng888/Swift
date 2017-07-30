@@ -13,6 +13,7 @@
 		E974CC571F1DCF9F00F9178D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E974CC561F1DCF9F00F9178D /* Assets.xcassets */; };
 		E974CC5A1F1DCF9F00F9178D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E974CC581F1DCF9F00F9178D /* LaunchScreen.storyboard */; };
 		E974CC621F1DD4C200F9178D /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E974CC611F1DD4C200F9178D /* ResultsViewController.swift */; };
+		E9EEE2021F2E75A10014C4C4 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EEE2011F2E75A10014C4C4 /* HistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E974CC591F1DCF9F00F9178D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E974CC5B1F1DCF9F00F9178D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E974CC611F1DD4C200F9178D /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		E9EEE2011F2E75A10014C4C4 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryViewController.swift; path = ../HistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				E974CC4F1F1DCF9F00F9178D /* AppDelegate.swift */,
 				E974CC511F1DCF9F00F9178D /* ViewController.swift */,
+				E9EEE2011F2E75A10014C4C4 /* HistoryViewController.swift */,
 				E974CC531F1DCF9F00F9178D /* Main.storyboard */,
 				E974CC611F1DD4C200F9178D /* ResultsViewController.swift */,
 				E974CC561F1DCF9F00F9178D /* Assets.xcassets */,
@@ -143,6 +146,7 @@
 				E974CC521F1DCF9F00F9178D /* ViewController.swift in Sources */,
 				E974CC501F1DCF9F00F9178D /* AppDelegate.swift in Sources */,
 				E974CC621F1DD4C200F9178D /* ResultsViewController.swift in Sources */,
+				E9EEE2021F2E75A10014C4C4 /* HistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +310,7 @@
 				E974CC601F1DCF9F00F9178D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
