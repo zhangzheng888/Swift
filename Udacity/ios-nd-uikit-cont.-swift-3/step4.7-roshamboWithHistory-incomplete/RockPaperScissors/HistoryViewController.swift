@@ -25,6 +25,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         return history.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let CellID = "HistoryCell"

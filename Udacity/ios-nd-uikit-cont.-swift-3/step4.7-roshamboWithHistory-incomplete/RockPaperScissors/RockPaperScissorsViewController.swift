@@ -24,6 +24,8 @@ class RockPaperScissorsViewController: UIViewController {
     @IBOutlet weak var rockButton: UIButton!
     @IBOutlet weak var paperButton: UIButton!
     @IBOutlet weak var scissorsButton: UIButton!
+        
+//    @IBOutlet weak var tableView: UITableView!
     
     // MARK: Actions
     
@@ -91,7 +93,7 @@ class RockPaperScissorsViewController: UIViewController {
 //        let match = RPSMatch(p1: playersMove, p2: computersMove)
         
         // Add match to the history
-        history.append(match)
+//        history.append(match)
         
         // Get the Storyboard and ResultViewController
         let storyboard = UIStoryboard (name: "Main", bundle: nil)
@@ -105,10 +107,10 @@ class RockPaperScissorsViewController: UIViewController {
 
     // MARK: Segue
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //Notice that this code works for both Scissors and Paper
-        let controller = segue.destination as! ResultViewController
-        controller.match = self.match
+//        let controller = segue.destination as! ResultViewController
+//        controller.match = self.match
 //        if segue.identifier == "showHistory" {
 //            let controller = segue.destination as! HistoryViewController
 //            controller.history = history
@@ -117,6 +119,6 @@ class RockPaperScissorsViewController: UIViewController {
 //            let controller = segue.destination as! ResultViewController
 //            controller.match = self.match
 //        }
-    }
+//    }
     
 }

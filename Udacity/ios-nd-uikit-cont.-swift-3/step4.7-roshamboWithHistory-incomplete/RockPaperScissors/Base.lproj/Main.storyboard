@@ -58,12 +58,12 @@
                                     <action selector="makeYourMove:" destination="iYZ-Mq-4iF" eventType="touchUpInside" id="fGy-X8-GSq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Jc-4y-cTK">
-                                <rect key="frame" x="135" y="518" width="50" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2Y-6H-b1V">
+                                <rect key="frame" x="130" y="71" width="61" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="History"/>
                                 <connections>
-                                    <action selector="showHistory:" destination="iYZ-Mq-4iF" eventType="touchUpInside" id="PSX-ej-JaL"/>
+                                    <action selector="showHistory:" destination="iYZ-Mq-4iF" eventType="touchUpInside" id="HzE-XQ-6xh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -151,41 +151,41 @@
             </objects>
             <point key="canvasLocation" x="789" y="141"/>
         </scene>
-        <!--HistoryViewController-->
-        <scene sceneID="ctQ-cH-t4P">
+        <!--History View Controller-->
+        <scene sceneID="QXS-Ed-3Ej">
             <objects>
-                <viewController id="6yY-Fl-7db" userLabel="HistoryViewController" customClass="HistoryViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryViewController" title="History View Controller" id="gfC-Is-edT" customClass="HistoryViewController" customModule="RockPaperScissors" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="XrI-ca-L4m"/>
-                        <viewControllerLayoutGuide type="bottom" id="X1w-0m-YZS"/>
+                        <viewControllerLayoutGuide type="top" id="hCW-dU-dyj"/>
+                        <viewControllerLayoutGuide type="bottom" id="AtR-8X-AfZ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="smB-Uf-5pw">
+                    <view key="view" contentMode="scaleToFill" id="y4o-2D-PWv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NOW-Rt-mcv">
-                                <rect key="frame" x="16" y="20" width="288" height="504"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GK3-cG-QGC">
+                                <rect key="frame" x="16" y="28" width="288" height="498"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" id="P5x-BM-9OT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" textLabel="fGP-uS-97Y" detailTextLabel="sfc-jW-Gx6" style="IBUITableViewCellStyleSubtitle" id="rSy-AE-2G3">
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P5x-BM-9OT" id="fT5-EM-TXm">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rSy-AE-2G3" id="uF3-co-HWe">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wa9-xU-OO7">
-                                                    <rect key="frame" x="8" y="11" width="34" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fGP-uS-97Y">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0E-G9-JNn">
-                                                    <rect key="frame" x="238" y="11" width="44" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sfc-jW-Gx6">
+                                                    <rect key="frame" x="15" y="25.5" width="33" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -193,14 +193,18 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="gfC-Is-edT" id="O3C-GE-GeZ"/>
+                                    <outlet property="delegate" destination="gfC-Is-edT" id="e3o-df-Z7X"/>
+                                </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ymi-jZ-klI">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6An-QG-GjH">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="OK" id="TMf-Xg-wF7">
+                                    <barButtonItem title="OK" id="dCf-Fu-9vr">
                                         <connections>
-                                            <action selector="dismissHistory:" destination="6yY-Fl-7db" id="SNT-5T-6MO"/>
+                                            <action selector="dismissHistory:" destination="gfC-Is-edT" id="Qna-qL-Mgn"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -209,9 +213,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jDI-op-0pR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tcg-rR-4zp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1188" y="141"/>
+            <point key="canvasLocation" x="789" y="771"/>
         </scene>
     </scenes>
     <resources>
