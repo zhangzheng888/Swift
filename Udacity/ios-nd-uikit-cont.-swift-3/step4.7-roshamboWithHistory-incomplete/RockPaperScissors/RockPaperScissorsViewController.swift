@@ -46,7 +46,12 @@ class RockPaperScissorsViewController: UIViewController {
     }
     
     @IBAction func showHistory(_ sender: AnyObject) {
-        //TODO: Present HistoryViewController
+//        performSegue(withIdentifier: "showHistory", sender: self)
+        let storyboard = self.storyboard
+        let controller = storyboard?.instantiateViewController(withIdentifier: "HistoryViewController")as! HistoryViewController
+        
+        controller.history = self.history
+        self.present(controller, animated: true, completion: nil)
     }
     
     // MARK: Play!
@@ -64,23 +69,38 @@ class RockPaperScissorsViewController: UIViewController {
         //Here are the 3 ways of presenting a View Controller
         
         // 1st Way: Programmatic View Controller Presentation
-        if (playersMove == RPS.rock) {
-            // Get the storyboard and ResultViewController
-            let storyboard = UIStoryboard (name: "Main", bundle: nil)
-            let resultVC = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+//        if (playersMove == RPS.rock) {
+//            // Get the storyboard and ResultViewController
+//            let storyboard = UIStoryboard (name: "Main", bundle: nil)
+//            let resultVC = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
         
             // Communicate the match
-            resultVC.match = self.match
-            self.present(resultVC, animated: true, completion: nil)
-        }
+//            resultVC.match = self.match
+//            self.present(resultVC, animated: true, completion: nil)
+//        }
         
         // 2nd Way: Code plus Segue
-        else if (playersMove == RPS.paper) {
-            performSegue(withIdentifier: "throwDownPaper", sender: self)
-        }
+//        else if (playersMove == RPS.paper) {
+//            performSegue(withIdentifier: "throwDownPaper", sender: self)
+//        }
         
-        // 3rd Way: Segue Only, No code!
-        // But don't forget to implement prepareForSegue.
+         // 3rd Way: Segue Only, No code!
+         // But don't forget to implement prepareForSegue.
+        
+//        let computersMove = RPS()
+//        let match = RPSMatch(p1: playersMove, p2: computersMove)
+        
+        // Add match to the history
+        history.append(match)
+        
+        // Get the Storyboard and ResultViewController
+        let storyboard = UIStoryboard (name: "Main", bundle: nil)
+        let resultVC = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+        
+        // Communicate the match to the ResultViewController
+        resultVC.match = match
+        
+        self.present(resultVC, animated: true, completion: nil)
     }
 
     // MARK: Segue
@@ -89,5 +109,14 @@ class RockPaperScissorsViewController: UIViewController {
         //Notice that this code works for both Scissors and Paper
         let controller = segue.destination as! ResultViewController
         controller.match = self.match
+//        if segue.identifier == "showHistory" {
+//            let controller = segue.destination as! HistoryViewController
+//            controller.history = history
+//        }
+//        else if segue.identifier == "throwDownPaper" || segue.identifier == "throwDownScissors" {
+//            let controller = segue.destination as! ResultViewController
+//            controller.match = self.match
+//        }
     }
+    
 }
