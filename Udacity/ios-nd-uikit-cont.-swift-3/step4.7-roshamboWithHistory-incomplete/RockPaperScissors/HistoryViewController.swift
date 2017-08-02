@@ -36,6 +36,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.textLabel!.text = victoryStatusDescription(match)
         cell.detailTextLabel!.text = "\(match.p1) vs. \(match.p2)"
+        cell.imageView?.image = ResultViewController().imageForMatch(history[indexPath.row])//imageForMatch(match)
+//        cell.rowHeight = UITableViewAutomaticDimension
+//        cell.estimatedRowHeight = 100
         
         return cell
     }
