@@ -52,10 +52,22 @@ class ViewController: UIViewController {
         setUIEnabled(false)
         
         if !phraseTextField.text!.isEmpty {
+            
             photoTitleLabel.text = "Searching..."
-            // TODO: Set necessary parameters!
-            let methodParameters: [String: AnyObject] = [:]
+            
+            let methodParameters: [String: AnyObject] = [
+            
+                Constants.FlickrParameterKeys.SafeSearch: Constants.FlickrParameterValues.UseSafeSearch as AnyObject,
+                Constants.FlickrParameterKeys.Text: phraseTextField.text as AnyObject,
+                Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL as AnyObject,
+                Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey as AnyObject,
+                Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod as AnyObject,
+                Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat as AnyObject,
+                Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback as AnyObject
+            ]
+            
             displayImageFromFlickrBySearch(methodParameters)
+            
         } else {
             setUIEnabled(true)
             photoTitleLabel.text = "Phrase Empty."
@@ -69,8 +81,13 @@ class ViewController: UIViewController {
         
         if isTextFieldValid(latitudeTextField, forRange: Constants.Flickr.SearchLatRange) && isTextFieldValid(longitudeTextField, forRange: Constants.Flickr.SearchLonRange) {
             photoTitleLabel.text = "Searching..."
+            
             // TODO: Set necessary parameters!
-            let methodParameters: [String: AnyObject] = [:]
+            let methodParameters: [String: AnyObject] = [
+            
+                Constants.FlickrParameterKeys.
+            ]
+            
             displayImageFromFlickrBySearch(methodParameters)
         }
         else {
