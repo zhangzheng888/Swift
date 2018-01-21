@@ -122,7 +122,21 @@ class ViewController: UIViewController {
         
         print(flickrURLFromParameters(methodParameters))
         
-        // TODO: Make request to Flickr!
+        // create session and request
+        
+        let session = URLSession.shared
+        let request = URLRequest(url: flickrURLFromParameters(methodParameters))
+        
+        // create network request
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if error == nil {
+                print(data)
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+        
+        task.resume()
     }
     
     // MARK: Helper for Creating a URL from Parameters
