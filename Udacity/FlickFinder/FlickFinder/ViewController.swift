@@ -85,14 +85,34 @@ class ViewController: UIViewController {
             // TODO: Set necessary parameters!
             let methodParameters: [String: AnyObject] = [
             
-                Constants.FlickrParameterKeys.
+                Constants.FlickrParameterKeys.SafeSearch: Constants.FlickrParameterValues.UseSafeSearch as AnyObject,
+                Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL as AnyObject,
+                Constants.FlickrParameterKeys.BoundingBox: bboxString() as AnyObject,
+                Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey as AnyObject,
+                Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod as AnyObject,
+                Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat as AnyObject,
+                Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback as AnyObject
             ]
             
             displayImageFromFlickrBySearch(methodParameters)
         }
         else {
             setUIEnabled(true)
+            
             photoTitleLabel.text = "Lat should be [-90, 90].\nLon should be [-180, 180]."
+        }
+    }
+    
+    private func bboxString() -> String {
+        //make sure the boundingbox is enclosed in the minimum and maximum set
+        if let latitude = Double(latitudeTextField.text!), let longitude = Double(longitudeTextField.text!) {
+            let minimumLat = max(latitude - Constants.Flickr.SearchBBoxHalfHeight, Constants.Flickr.SearchLatRange.0)
+            let mimimumLon = max(longitude - Constants.Flickr.SearchBBoxHalfWidth, Constants.Flickr.SearchLonRange.0)
+            let maximumLat = min(latitude + Constants.Flickr.SearchBBoxHalfHeight, Constants.Flickr.SearchLatRange.1)
+            let maximumLon = min(longitude + Constants.Flickr.SearchBBoxHalfWidth, Constants.Flickr.SearchLonRange.1)
+            return "\(minimumLat), \(mimimumLon), \(maximumLat), \(maximumLon)"
+        } else {
+            return "0, 0, 0, 0"
         }
     }
     
