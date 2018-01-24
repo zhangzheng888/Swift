@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             let methodParameters: [String: AnyObject] = [
             
                 Constants.FlickrParameterKeys.SafeSearch: Constants.FlickrParameterValues.UseSafeSearch as AnyObject,
-                Constants.FlickrParameterKeys.Text: phraseTextField.text as AnyObject,
+                Constants.FlickrParameterKeys.Text: phraseTextField.text! as AnyObject,
                 Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL as AnyObject,
                 Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey as AnyObject,
                 Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod as AnyObject,
@@ -83,18 +83,18 @@ class ViewController: UIViewController {
             photoTitleLabel.text = "Searching..."
             
             // TODO: Set necessary parameters!
-            let methodParameters: [String: AnyObject] = [
+            let methodParameters = [
             
-                Constants.FlickrParameterKeys.SafeSearch: Constants.FlickrParameterValues.UseSafeSearch as AnyObject,
-                Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL as AnyObject,
-                Constants.FlickrParameterKeys.BoundingBox: bboxString() as AnyObject,
-                Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey as AnyObject,
-                Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod as AnyObject,
-                Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat as AnyObject,
-                Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback as AnyObject
+                Constants.FlickrParameterKeys.SafeSearch: Constants.FlickrParameterValues.UseSafeSearch,
+                Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL,
+                Constants.FlickrParameterKeys.BoundingBox: bboxString(),
+                Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey,
+                Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
+                Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat,
+                Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback
             ]
             
-            displayImageFromFlickrBySearch(methodParameters)
+            displayImageFromFlickrBySearch(methodParameters as [String:AnyObject])
         }
         else {
             setUIEnabled(true)
@@ -129,10 +129,79 @@ class ViewController: UIViewController {
         
         // create network request
         let task = session.dataTask(with: request) { (data, response, error) in
-            if error == nil {
-                print(data)
+            // completion handler
+            
+            func displayError(error: String) {
+                print(error)
+                performUIUpdatesOnMain {
+                    self.setUIEnabled(true)
+                    self.photoTitleLabel.text = "No photo returned. Try again"
+                    self.photoImageView.image = nil
+                }
+            }
+            
+            guard (error == nil) else {
+                displayError(error: "There was an error with your request")
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                displayError(error: "Your request returned a status code other than 2xx")
+                return
+            }
+            
+            guard let data = data else {
+                displayError(error: "No data was returned by the request")
+                return
+            }
+            
+            //parse the data
+            let parsedResult:  [String:AnyObject]!
+            do {
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+            } catch {
+                displayError(error: "JSON data parsing error for '\(data)'")
+                return
+            }
+            
+            guard let stat = parsedResult[Constants.FlickrResponseKeys.Status] as? String, stat == Constants.FlickrResponseValues.OKStatus else {
+                displayError(error: "Flikr API returned an error. See error code and message in \(parsedResult)")
+                return
+            }
+            
+            guard let photosDictionary = parsedResult[Constants.FlickrResponseKeys.Photos] as? [String:AnyObject] else {
+                displayError(error: "Key not found '\(Constants.FlickrResponseKeys.Photos)'")
+                return
+            }
+            
+            guard let photosArray = photosDictionary[Constants.FlickrResponseKeys.Photo] as? [[String:AnyObject]] else {
+                displayError(error: "Key not found '\(Constants.FlickrResponseKeys.Photo)'")
+                return
+            }
+            
+            if photosArray.count == 0 {
+                displayError(error: "No photos found. Search again")
+                return
             } else {
-                print(error!.localizedDescription)
+                let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
+                let photoDictionary = photosArray[randomPhotoIndex] as [String:AnyObject]
+                let photoTitle = photoDictionary[Constants.FlickrResponseKeys.Title] as? String
+                
+                guard let imageURLString = photoDictionary[Constants.FlickrResponseKeys.MediumURL] as? String else {
+                    displayError(error: "The key '\(Constants.FlickrResponseKeys.MediumURL)' is invalid")
+                    return
+                }
+                
+                let imageURL = URL(string: imageURLString)
+                if let imageData = try? Data(contentsOf: imageURL!) {
+                    performUIUpdatesOnMain {
+                        self.setUIEnabled(true)
+                        self.photoImageView.image = UIImage(data: imageData)
+                        self.photoTitleLabel.text = photoTitle ?? "(Untitled)"
+                    }
+                } else {
+                        displayError(error: "Image does not exist")
+                }
             }
         }
         
