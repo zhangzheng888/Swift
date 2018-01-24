@@ -174,6 +174,78 @@ class ViewController: UIViewController {
                 return
             }
             
+            guard let totalPages = photosDictionary[Constants.FlickrResponseKeys.Pages] as? Int else {
+                displayError(error: "Key not found '\(Constants.FlickrResponseKeys.Pages)'")
+                return
+            }
+            
+            // pick a random page
+            let pageLimit = min(totalPages, 40)
+            let randomPage = Int(arc4random_uniform(UInt32(pageLimit))) + 1
+            self.displayImageFromFlickrBySearch(methodParameters, withPageNumber: randomPage)
+            
+        }
+        
+        task.resume()
+    }
+    
+    private func displayImageFromFlickrBySearch(_ methodParameters: [String: AnyObject], withPageNumber: Int){
+        
+        var methodParametersWithPageNumber = methodParameters
+        methodParametersWithPageNumber[Constants.FlickrParameterKeys.Page] = withPageNumber as AnyObject?
+        
+        // create session and request
+        
+        let session = URLSession.shared
+        let request = URLRequest(url: flickrURLFromParameters(methodParameters))
+        
+        // create network request
+        let task = session.dataTask(with: request) { (data, response, error) in
+            // completion handler
+            
+            func displayError(error: String) {
+                print(error)
+                performUIUpdatesOnMain {
+                    self.setUIEnabled(true)
+                    self.photoTitleLabel.text = "No photo returned. Try again"
+                    self.photoImageView.image = nil
+                }
+            }
+            
+            guard (error == nil) else {
+                displayError(error: "There was an error with your request")
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                displayError(error: "Your request returned a status code other than 2xx")
+                return
+            }
+            
+            guard let data = data else {
+                displayError(error: "No data was returned by the request")
+                return
+            }
+            
+            //parse the data
+            let parsedResult:  [String:AnyObject]!
+            do {
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+            } catch {
+                displayError(error: "JSON data parsing error for '\(data)'")
+                return
+            }
+            
+            guard let stat = parsedResult[Constants.FlickrResponseKeys.Status] as? String, stat == Constants.FlickrResponseValues.OKStatus else {
+                displayError(error: "Flikr API returned an error. See error code and message in \(parsedResult)")
+                return
+            }
+            
+            guard let photosDictionary = parsedResult[Constants.FlickrResponseKeys.Photos] as? [String:AnyObject] else {
+                displayError(error: "Key not found '\(Constants.FlickrResponseKeys.Photos)'")
+                return
+            }
+            
             guard let photosArray = photosDictionary[Constants.FlickrResponseKeys.Photo] as? [[String:AnyObject]] else {
                 displayError(error: "Key not found '\(Constants.FlickrResponseKeys.Photo)'")
                 return
@@ -200,7 +272,7 @@ class ViewController: UIViewController {
                         self.photoTitleLabel.text = photoTitle ?? "(Untitled)"
                     }
                 } else {
-                        displayError(error: "Image does not exist")
+                    displayError(error: "Image does not exist")
                 }
             }
         }
