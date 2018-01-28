@@ -295,12 +295,58 @@ class LoginViewController: UIViewController {
         /* TASK: Get the user's ID, then store it (appDelegate.userID) for future use and go to next view! */
         
         /* 1. Set the parameters */
-        
+        let methodParameters = [
+            Constants.TMDBParameterKeys.ApiKey:Constants.TMDBParameterValues.ApiKey,
+            Constants.TMDBParameterKeys.SessionID:sessionID
+        ]
         /* 2/3. Build the URL, Configure the request */
+        let request = URLRequest(url: appDelegate.tmdbURLFromParameters(methodParameters as [String:AnyObject], withPathExtension: "/account"))
         /* 4. Make the request */
+        let task = appDelegate.sharedSession.dataTask(with: request) { (data, response, error) in
+            func displayError(_ error: String) {
+                print(error)
+                performUIUpdatesOnMain {
+                    self.setUIEnabled(true)
+                    self.debugTextLabel.text = "Failed to retrieve user account"
+                }
+            }
+            
+            guard (error == nil) else {
+                displayError("There is no data of user account")
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode <= 200 && statusCode >= 299 else {
+                displayError("Status code is not in the 2xx")
+                return
+            }
+            
+            guard let data = data else {
+                displayError("There is something wrong with the request")
+                return
+            }
+        
         /* 5. Parse the data */
+            let parsedResult: [String:AnyObject]!
+            do {
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+            } catch {
+                displayError("Could not parse result as JSON")
+                return
+            }
+            
+            guard let userID = parsedResult[Constants.TMDBResponseKeys.UserID] as? Int else {
+                displayError("The userID key is invalid")
+                return
+            }
+            
+            
         /* 6. Use the data! */
+            self.appDelegate.userID = userID
+            self.completeLogin()
+        }
         /* 7. Start the request */
+        task.resume()
     }
 }
 
