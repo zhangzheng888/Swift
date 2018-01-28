@@ -100,7 +100,7 @@ class LoginViewController: UIViewController {
         let task = appDelegate.sharedSession.dataTask(with: request) { (data, response, error) in
             
             // if an error occurs, print it and re-able the UI
-            func displayError(_ error: String) {
+            func displayError(_ error: String, debugTextLabel: String? = nil) {
                 
                 print(error)
                 performUIUpdatesOnMain {
@@ -175,7 +175,7 @@ class LoginViewController: UIViewController {
         
         let task = appDelegate.sharedSession.dataTask(with: request) { (data, response, error) in
             
-            func displayError(_ error: String) {
+            func displayError(_ error: String, debugLabelText: String? = nil) {
                 print(error)
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
@@ -229,7 +229,10 @@ class LoginViewController: UIViewController {
         
         /* 1. Set the parameters */
         
-        let methodParameters = [Constants.TMDBParameterKeys.ApiKey:Constants.TMDBParameterValues.ApiKey]
+        let methodParameters = [
+            Constants.TMDBParameterKeys.ApiKey:Constants.TMDBParameterValues.ApiKey,
+            Constants.TMDBResponseKeys.RequestToken: requestToken
+        ]
         
         /* 2/3. Build the URL, Configure the request */
         
@@ -239,7 +242,7 @@ class LoginViewController: UIViewController {
         
         let task = appDelegate.sharedSession.dataTask(with: request) { (data, response, error) in
             
-            func displayError(_ error: String) {
+            func displayError(_ error: String, debugTextLabel: String? = nil) {
                 print(error)
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
@@ -303,7 +306,7 @@ class LoginViewController: UIViewController {
         let request = URLRequest(url: appDelegate.tmdbURLFromParameters(methodParameters as [String:AnyObject], withPathExtension: "/account"))
         /* 4. Make the request */
         let task = appDelegate.sharedSession.dataTask(with: request) { (data, response, error) in
-            func displayError(_ error: String) {
+            func displayError(_ error: String, debugTextLabe: String? = nil) {
                 print(error)
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
@@ -316,7 +319,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode <= 200 && statusCode >= 299 else {
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 displayError("Status code is not in the 2xx")
                 return
             }
