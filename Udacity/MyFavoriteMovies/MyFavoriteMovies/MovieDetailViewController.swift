@@ -172,16 +172,70 @@ class MovieDetailViewController: UIViewController {
     
     @IBAction func toggleFavorite(_ sender: AnyObject) {
         
-        // let shouldFavorite = !isFavorite
+        let shouldFavorite = !isFavorite
         
         /* TASK: Add movie as favorite, then update favorite buttons */
-        /* 1. Set the parameters */
-        /* 2/3. Build the URL, Configure the request */
-        /* 4. Make the request */
-        /* 5. Parse the data */
-        /* 6. Use the data! */
-        /* 7. Start the request */
         
+        /* 1. Set the parameters */
+        let methodParameters = [
+            Constants.TMDBParameterKeys.ApiKey:Constants.TMDBParameterValues.ApiKey,
+            Constants.TMDBParameterKeys.SessionID:appDelegate.sessionID!
+        ]
+        
+        /* 2/3. Build the URL, Configure the request */
+        let request = NSMutableURLRequest(url: appDelegate.tmdbURLFromParameters(methodParameters as [String:AnyObject], withPathExtension: "/account/\(appDelegate.userID!)/favorite"))
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"media_type\": \"movie\",\"media_id\": \(movie!.id),\"favorite\":\(shouldFavorite)}".data(using: String.Encoding.utf8)
+        /* 4. Make the request */
+        let task = appDelegate.sharedSession.dataTask(with: request as URLRequest) { (data, response, error) in
+            guard (error == nil) else {
+                print("There was an error with your request")
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                print("The status code is not 2xx")
+                return
+            }
+            
+            guard let data = data else {
+                print("The data is invalid")
+                return
+            }
+        
+        /* 5. Parse the data */
+            let parsedResult: [String:AnyObject]!
+            do {
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+            } catch {
+                print("The data could not be parsed into JSON")
+                return
+            }
+            
+            guard let tmdbStatusCode = parsedResult[Constants.TMDBResponseKeys.StatusCode] as? Int else {
+                print("The status code key is invalid")
+                return
+            }
+            
+            if shouldFavorite && !(tmdbStatusCode == 12 || tmdbStatusCode == 1) {
+                print("Unrecognized status code for POST")
+                return
+            } else if !shouldFavorite && tmdbStatusCode != 13 {
+                print("Unrecognized status code")
+                return
+            }
+        
+        /* 6. Use the data! */
+            self.isFavorite = shouldFavorite
+            
+            performUIUpdatesOnMain {
+                self.favoriteButton.tintColor = (shouldFavorite) ? nil: .black
+            }
+        }
+        /* 7. Start the request */
+        task.resume()
         /* If the favorite/unfavorite request completes, then use this code to update the UI...
         
         performUIUpdatesOnMain {
