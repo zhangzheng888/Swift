@@ -124,7 +124,7 @@ extension TMDBClient {
         
         
         let parameters = [TMDBClient.ParameterKeys.RequestToken: requestToken!]
-        let _ = taskForGETMethod(Methods.AuthenticationSessionNew, parameters: parameters as [String : AnyObject]) { (results, error) in
+        let _ = taskForGETMethod(Methods.AuthenticationSessionNew, parameters: parameters as [String:AnyObject]) { (results, error) in
             
             if let error = error {
                 print(error)
@@ -148,13 +148,24 @@ extension TMDBClient {
         /* 2. Make the request */
         /* 3. Send the desired value(s) to completion handler */
         
-        /*
+        let parameters = [TMDBClient.ParameterKeys.SessionID: TMDBClient.sharedInstance().userID!]
         
-        taskForGETMethod(method, parameters: parameters) { (results, error) in
+        let _ = taskForGETMethod(Methods.Account, parameters: parameters as [String:AnyObject]) { (results, error) in
+            if let error = error {
+                print(error)
+                completionHandlerForUserID(false, nil, "Authentication Failed (User ID).")
+            } else {
+                if let userID = results?[TMDBClient.JSONResponseKeys.UserID] as? Int {
+                    completionHandlerForUserID(true, userID, nil)
+                } else {
+                    print("The User ID response key is invalid")
+                    completionHandlerForUserID(false, nil, "Authentication Failed (Used ID).")
+                }
+            }
         
         }
         
-        */
+        
     }
     
     // MARK: GET Convenience Methods
