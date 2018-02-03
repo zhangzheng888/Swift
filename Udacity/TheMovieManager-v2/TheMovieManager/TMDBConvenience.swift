@@ -192,7 +192,7 @@ extension TMDBClient {
         /* 3. Send the desired value(s) to completion handler */
         
         let parameters = [TMDBClient.ParameterKeys.SessionID: TMDBClient.sharedInstance().sessionID!]
-        var mutableMethod: String = Methods.AccountIDWatchlist
+        var mutableMethod: String = Methods.AccountIDWatchlistMovies
         mutableMethod = substituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value: String(TMDBClient.sharedInstance().userID!))!
         
         let _ = taskForGETMethod(Methods.AccountIDWatchlistMovies, parameters: parameters as [String:AnyObject]) { (results, error) in
@@ -287,12 +287,23 @@ extension TMDBClient {
         /* 2. Make the request */
         /* 3. Send the desired value(s) to completion handler */
         
-        /*
+        let parameters = [TMDBClient.ParameterKeys.SessionID: TMDBClient.sharedInstance().sessionID!]
+        var mutableMethod: String = Methods.AccountIDFavorite
         
-        taskForPOSTMethod(method, parameters: parameters, jsonBody: jsonBody) { (result, error) in
+        mutableMethod = substituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value: String(TMDBClient.sharedInstance().userID!))!
         
+        let jsonBody = "{\"\(TMDBClient.JSONBodyKeys.MediaType)\": \"movie\",\"\(TMDBClient.JSONBodyKeys.MediaID)\": \"\(movie.id)\",\"\(TMDBClient.JSONBodyKeys.Favorite)\": \(watchlist)}"
+        
+        let _ = taskForPOSTMethod(mutableMethod, parameters: parameters as [String:AnyObject], jsonBody: jsonBody) { (results, error) in
+            if let error = error {
+                completionHandlerForWatchlist(nil, error)
+            } else {
+                if let results = results?[TMDBClient.JSONResponseKeys.StatusCode] as? Int {
+                    completionHandlerForWatchlist(results, nil)
+                } else {
+                    completionHandlerForWatchlist(nil, NSError(domain: "postToWatchlist parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postToWatchlist"]))
+                }
+            }
         }
-        
-        */
     }
 }
