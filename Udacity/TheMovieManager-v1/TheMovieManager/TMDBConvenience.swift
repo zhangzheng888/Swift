@@ -92,7 +92,7 @@ extension TMDBClient {
                 } else {
                     
                     print("Request Token key is incorrect")
-                    completionHandlerForToken(false, nil, "Login Failed(Request Token Key)")
+                    completionHandlerForToken(false, nil, "Login Failed(Request Token Key).")
                 }
             }
         }
@@ -122,13 +122,24 @@ extension TMDBClient {
         /* 2. Make the request */
         /* 3. Send the desired value(s) to completion handler */
         
-        /*
         
-        taskForGETMethod(method, parameters: parameters) { (results, error) in
-        
+        let parameters = [TMDBClient.ParameterKeys.RequestToken: requestToken!]
+        let _ = taskForGETMethod(Methods.AuthenticationSessionNew, parameters: parameters as [String : AnyObject]) { (results, error) in
+            
+            if let error = error {
+                print(error)
+                completionHandlerForSession(false, nil, "Authentication Session Failed.")
+            } else {
+                if let sessionID = results?[TMDBClient.JSONResponseKeys.SessionID] as? String {
+                    completionHandlerForSession(true, sessionID, nil)
+                } else {
+                    print("Could not find the SessionID response ")
+                    completionHandlerForSession(false, nil, "Authentication Session Failed.")
+                }
+            }
         }
         
-        */
+ 
     }
     
     private func getUserID(_ completionHandlerForUserID: @escaping (_ success: Bool, _ userID: Int?, _ errorString: String?) -> Void) {
