@@ -21,7 +21,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dmk-Zf-Z5V">
                                 <rect key="frame" x="16" y="36" width="343" height="613"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="Wzr-R1-hZ8" userLabel="On The Grid Icon">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="Wzr-R1-hZ8" userLabel="Udacity Logo">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="MIq-YW-H97"/>
