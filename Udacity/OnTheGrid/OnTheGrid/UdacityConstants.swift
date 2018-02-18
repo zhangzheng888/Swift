@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension Udacity {
+extension UdacityClient {
     
     struct Constants {
         static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
@@ -29,6 +29,7 @@ extension Udacity {
         static let ApiScheme = "https"
         static let ApiHost = "udacity.com"
         static let ApiPath = "/api"
+        static let SignUp = "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
     }
     
     struct Method {
