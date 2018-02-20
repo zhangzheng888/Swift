@@ -12,9 +12,9 @@ struct StudentData{
     
     static var sharedInstance = StudentData()
     
-    private init() {}
-    
     // MARK: - Properties
     
-    private var students = [Student]()
+    var students = [Student]()
+    
+    private init() {}
 }
