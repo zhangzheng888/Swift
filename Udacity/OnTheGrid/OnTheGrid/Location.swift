@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 
 struct Location {
+    
     var latitude: Double?
     var longitude: Double?
     var mapString: String?
