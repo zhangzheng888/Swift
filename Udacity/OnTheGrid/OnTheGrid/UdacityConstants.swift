@@ -17,14 +17,6 @@ extension UdacityClient {
         static let JsonApplication = "application/json"
     }
     
-    struct Color {
-        static let blue = UIColor(red: 21/255, green: 164/255, blue: 222/255, alpha: 1.0)
-        static let purple = UIColor(red: 151/255, green: 499/255, blue: 233/255, alpha: 1.0)
-        static let magenta = UIColor(red: 251/255, green: 57/255, blue: 112/255, alpha: 1.0)
-        static let green = UIColor(red: 25/255, green: 195/255, blue: 192/255, alpha: 1.0)
-        
-    }
-    
     struct Component {
         static let ApiScheme = "https"
         static let ApiHost = "udacity.com"
