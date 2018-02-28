@@ -36,7 +36,6 @@ extension UdacityClient {
         static let RequestToken = "request_token"
         static let Query = "query"
         static let UniqueKey = "uniqueKey"
-        
     }
     
     struct Header {
