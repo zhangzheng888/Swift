@@ -55,15 +55,16 @@ class LoginViewController: UIViewController {
             email = usernameTextField.text!
             password = passwordTextField.text!
             
-            UdacityClient.postSession(username: email!, password: password!) { (error: UdacityClient.RequestError?, errorDescription: String?) in
+            UdacityClient.sharedInstance().authenticateWithViewController(self, email!, password!) { (success, error) in
                 
-                if error == nil {
-                    performUIUpdatesOnMain {
+                performUIUpdatesOnMain {
+                    if success {
                         self.completeLogin()
+                    } else {
+                        self.displayError(error)
                     }
-                } else {
-                    self.displayError(errorDescription)
                     
+                    self.setUIEnabled(true)
                 }
             }
             
@@ -113,7 +114,9 @@ private extension LoginViewController {
     
     func displayError(_ errorString: String?) {
         if let errorString = errorString {
-            debugTextLabel.text = errorString
+            performUIUpdatesOnMain() {
+                self.debugTextLabel.text = errorString
+            }
         }
     }
 }
