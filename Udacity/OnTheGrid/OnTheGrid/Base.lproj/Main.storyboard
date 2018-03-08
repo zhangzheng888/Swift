@@ -56,7 +56,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="dmk-Zf-Z5V" id="3GQ-ll-zzx"/>
                                         </connections>
@@ -212,12 +212,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-YV-JvP">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-YV-JvP">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ly2-YV-JvP" firstAttribute="trailing" secondItem="72o-Uu-SYU" secondAttribute="trailing" id="30a-23-agg"/>
+                            <constraint firstItem="ly2-YV-JvP" firstAttribute="leading" secondItem="72o-Uu-SYU" secondAttribute="leading" id="6zM-I1-KkX"/>
+                            <constraint firstItem="ly2-YV-JvP" firstAttribute="top" secondItem="72o-Uu-SYU" secondAttribute="top" id="ENk-2E-v2b"/>
+                            <constraint firstItem="ly2-YV-JvP" firstAttribute="bottom" secondItem="72o-Uu-SYU" secondAttribute="bottom" id="aI0-O4-Mwx"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="72o-Uu-SYU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" id="M6b-Co-GwW"/>
