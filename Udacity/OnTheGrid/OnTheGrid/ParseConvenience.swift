@@ -82,14 +82,12 @@ extension ParseClient {
                         students.append(student)
                         
                     } else {
-                        
                         // Handle no name student error here
                         sendError("No Student Name returned")
                         return
                     }
                     
                 } else {
-                    
                     // Handle no location student error here
                     sendError("No Student Location returned")
                     return
@@ -97,7 +95,7 @@ extension ParseClient {
                 }
             }
             
-            DataSource.students = students
+            StudentData.sharedInstance.students = students
             
             completion(students, nil)
             
