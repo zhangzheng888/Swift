@@ -60,7 +60,45 @@ class ParseClient: NSObject {
     }
     
     // MARK: PUT
-    
+    func taskForPUTMethod(_ method: String, _ jsonBody: String, completionHandlerForPUT: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) ->
+        URLSessionTask {
+            
+            let request = NSMutableURLRequest(url: parseURLFromParameters(withPathExtension: method))
+            request.httpMethod = "POST"
+            request.addValue(Constants.ApplicationID, forHTTPHeaderField: ParameterKeys.ApplicationID)
+            request.addValue(Constants.APIKey, forHTTPHeaderField: ParameterKeys.APIKey)
+            request.addValue(Constants.JSONApplication, forHTTPHeaderField: ParameterKeys.ContentType)
+            request.httpBody = jsonBody.data(using: .utf8)
+            
+            let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
+                
+                func sendError(_ error: String){
+                    print(error)
+                    let userInfo = [NSLocalizedDescriptionKey: error]
+                    completionHandlerForPUT(nil, NSError(domain: "taskForPUTMethod", code: 1, userInfo: userInfo))
+                }
+                
+                guard (error==nil) else {
+                    sendError("There was an error with your request: \(error!)")
+                    return
+                }
+                
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                    sendError("Your request returned a status code other than 2xx!")
+                    return
+                }
+                
+                guard let data = data else {
+                    sendError("No data was returned by the request!")
+                    return
+                }
+                
+                self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForPUT)
+            })
+            
+            task.resume()
+            return task
+    }
     
     // MARK: POST
     func taskForPOSTMethod(_ method: String, jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
