@@ -13,10 +13,6 @@ class ParseClient: NSObject {
     // MARK: Properties
     var session = URLSession.shared
     
-    var requestToken: String? = nil
-    var sessionID: String? = nil
-    var userID: String? = nil
-    
     // MARK: Initialization
     
     override init() {
@@ -65,23 +61,24 @@ class ParseClient: NSObject {
     
     // MARK: PUT
     
+    
     // MARK: POST
-    func taskForWriteMethod(_ method: String, httpMethod: Write, jsonBody: String, completionHandlerForWrite: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForPOSTMethod(_ method: String, jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
-        var request = URLRequest(url: self.parseURLFromParameters(parameters: nil, withPathExtension: method))
+        let request = NSMutableURLRequest(url: self.parseURLFromParameters(parameters: nil, withPathExtension: method))
         
-        request.httpMethod = httpMethod.rawValue
+        request.httpMethod = "POST"
         request.addValue(Constants.ApplicationID, forHTTPHeaderField: ParameterKeys.ApplicationID)
         request.addValue(Constants.APIKey, forHTTPHeaderField: ParameterKeys.APIKey)
         request.addValue(Constants.JSONApplication, forHTTPHeaderField: ParameterKeys.ContentType)
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
         
-        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+        let task = session.dataTask(with: request as URLRequest) {(data, response, error) in
             
             func sendError(_ error: String) {
                 print(error)
                 let userInfo = [NSLocalizedDescriptionKey: error]
-                completionHandlerForWrite(nil, NSError(domain: "taskForWriteMethod", code: 1, userInfo: userInfo))
+                completionHandlerForPOST(nil, NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
             }
             
             guard (error == nil) else {
@@ -99,7 +96,7 @@ class ParseClient: NSObject {
                 return
             }
             
-            self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForWrite)
+            self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForPOST)
         }
         
         task.resume()
@@ -151,5 +148,25 @@ class ParseClient: NSObject {
         }
         
         return components.url!
+    }
+    
+    private func parseURLFromParameters(withPathExtension: String? = nil) -> URL {
+        
+        var components = URLComponents()
+        components.scheme = ParseClient.Constants.APIScheme
+        components.host = ParseClient.Constants.APIHost
+        components.path = ParseClient.Constants.APIPath + "/" + (withPathExtension ?? "")
+        
+        return components.url!
+    }
+    
+    // MARK: Shared Instance
+    
+    class func sharedInstance() -> ParseClient {
+        
+        struct Singleton {
+            static var sharedInstance = ParseClient()
+        }
+        return Singleton.sharedInstance
     }
 }
