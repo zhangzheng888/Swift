@@ -143,15 +143,6 @@ class ParseClient: NSObject {
     
     // MARK: HELPERS
     
-    // substitute the key for the value that is contained within the method name
-    func substituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
-        if method.range(of: "{\(key)}") != nil {
-            return method.replacingOccurrences(of: "{\(key)}", with: value)
-        } else {
-            return nil
-        }
-    }
-    
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
