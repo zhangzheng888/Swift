@@ -36,12 +36,16 @@ extension ParseClient {
     
     }
     
-    // MARK: Write Enumeration
-    enum Write: String {
-        
-        case PUT = "PUT"
-        case POST = "POST"
-        
+    // MARK: JSONResponseKeys
+    struct JSONResponseKeys {
+        static let FirstName = "firstName"
+        static let LastName = "lastName"
+        static let Latitude = "latitude"
+        static let Longitude = "longitude"
+        static let MediaURL = "mediaURL"
+        static let ObjectID = "objectId"
+        static let UniqueKey = "uniqueKey"
+        static let MapString = "mapString"
     }
     
     // MARK: Parameter Keys
@@ -52,9 +56,19 @@ extension ParseClient {
         static let SessionID = "session_id"
         static let RequestToken = "request_token"
         static let Query = "query"
-        static let Where = "where"
         static let UniqueKey = "uniqueKey"
         static let ContentType = "Content-Type"
+        static let Limit = "limit"
+        static let Order = "order"
+        static let Where = "where"
+        
+    }
+    
+    struct ParameterValues {
+        
+        static let LimitValue = "100"
+        static let LatestOrderValue = "-updatedAt"
+        static let UniqueKey = "uniqueKey"
         
     }
 }
