@@ -8,9 +8,13 @@
 
 import Foundation
 
-struct StudentData{
+public var uniqueKey: String = ""
+
+var userLocation = Student(dictionary: [:])
+
+class StudentData{
     
-    static var sharedInstance = StudentData()
+    static let sharedInstance = StudentData()
     
     // MARK: - Properties
     
