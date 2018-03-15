@@ -13,11 +13,13 @@ class ParseClient: NSObject {
     // MARK: Properties
     var session = URLSession.shared
     
-    // MARK: Initialization
+    var locations: [[String:AnyObject]]? = nil
     
-    override init() {
-        super.init()
-    }
+    // MARK: Initialization
+//
+//    override init() {
+//        super.init()
+//    }
 
     // MARK: GET
     
