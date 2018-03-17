@@ -11,94 +11,51 @@ import Foundation
 extension ParseClient {
     
     // MARK: GET Convenience
-    func getStudentLocation(uniqueKey: String, completion: @escaping (_ student: Student?, _ error: NSError?) -> Void) {
+    func getStudentLocation(_ completionHandlerForStudentLocation: @escaping (_ success: Bool, _ result: Student?, _ error: String?) -> Void) {
         
-        let parameters = [ParameterKeys.Where: "{\"\(ParameterKeys.UniqueKey)\":\"" + "\(uniqueKey)" + "\"}" as AnyObject]
+        let parameters = [ParameterKeys.Where: "{\"\(ParameterKeys.UniqueKey)\":\"" + "\(uniqueKey)" + "\"}"] as [String:AnyObject]
         
-        let _ = taskForGETMethod(Method.StudentLocation, parameters: parameters as [String:AnyObject]) { (data: AnyObject?, error: NSError?) in
+        let _ = taskForGETMethod(Method.StudentLocation, parameters: parameters, completionHandlerForGET: {(result, error) in
             
-            func sendError(_ error: String) {
-                let userInfo = [NSLocalizedDescriptionKey : error]
-                completion(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
+            if let error = error {
+                print(error)
+                completionHandlerForStudentLocation(false, nil, "Get User Location Failed.")
+            } else {
+                
+                guard let result = result?["results"] as? [[String:AnyObject]], !result.isEmpty else {
+                    print("User Location not found!")
+                    return
+                }
+                
+                if let location = Student.userLocationFromResults(result) {
+                    userLocation = location
+                    completionHandlerForStudentLocation(true, userLocation, nil)
+                }
             }
-            
-            guard (error == nil) else {
-                sendError("There was an error with your request: \(error!)")
-                return
-            }
-            
-            guard let result = data!["results"] as? [[String : AnyObject]] else {
-                sendError("No data was returned by the request!")
-                return
-            }
-            
-            print(result)
-            
-            let studentDictionary = result[0]
-            let location = Location(dictionary: studentDictionary)
-            let student = Student(dictionary: studentDictionary, location: location)
-            
-            completion(student, nil)
-        }
+        })
     }
 
-    func getStudentsLocation(completion: @escaping (_ students: [Student]?, _ error: NSError?) -> Void) {
+    func getStudentLocations(_ completionHandlerForStudentLocations: @escaping (_ success: Bool, _ students: [Student]?, _ error: String?) -> Void) {
         
         let parameters = ["limit": "100", "order": "-updatedAt"] as [String: AnyObject]
         
-        let _ = taskForGETMethod(Method.StudentLocation, parameters: parameters as [String:AnyObject]) { (data: AnyObject?, error: NSError?) in
+        let _ = taskForGETMethod(Method.StudentLocation, parameters: parameters, completionHandlerForGET: {(result, error) in
             
-            func sendError(_ error: String) {
-                let userInfo = [NSLocalizedDescriptionKey : error]
-                completion(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
-            }
-            
-            guard (error == nil) else {
-                sendError("There was an error with your request: \(error!)")
-                return
-            }
-            
-            guard let results = data!["results"] as? [[String : AnyObject]] else {
-                sendError("No data was returned by the request!")
-                return
-            }
-            
-            var students: [Student] = []
-            
-            for result in results {
+            if let error = error {
+                print(error)
+                completionHandlerForStudentLocations(false, nil, "Get Student Locations Failed.")
+            } else {
                 
-                let location = Location(dictionary: result)
-                
-                if location.coordinate != nil {
+                if let result = result?["results"] as? [[String:AnyObject]] {
                     
-                    let student = Student(dictionary: result, location: location)
-                    
-                    let firsNameHasEmptyString = student.firstName == nil || student.firstName == ""
-                    
-                    let lastNameHasEmptyString = student.lastName == nil || student.lastName == ""
-                    
-                    if !firsNameHasEmptyString || !lastNameHasEmptyString {
-                        
-                        students.append(student)
-                        
-                    } else {
-                        // Handle no name student error here
-                        sendError("No Student Name returned")
-                        return
-                    }
+                    let locations = Student.studentLocationsFromResults(result)
+                    StudentData.sharedInstance.studentLocations = locations
+                    completionHandlerForStudentLocations(true, locations, nil)
                     
                 } else {
-                    // Handle no location student error here
-                    sendError("No Student Location returned")
-                    return
-                    
+                    print("JSON Parse Error")
                 }
             }
-            
-            StudentData.sharedInstance.students = students
-            
-            completion(students, nil)
-            
-        }
+        })
     }
 }
