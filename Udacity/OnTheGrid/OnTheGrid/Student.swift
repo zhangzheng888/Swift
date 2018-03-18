@@ -60,7 +60,7 @@ struct Student {
         mapString = dictionary[ParseClient.JSONResponseKeys.MapString] as? String
     }
     
-    func studentLocationsFromResults(_ results: [[String:AnyObject]]) -> [Student] {
+    static func studentLocationsFromResults(_ results: [[String:AnyObject]]) -> [Student] {
         
         var locations = [Student]()
         
@@ -75,8 +75,8 @@ struct Student {
         var userLocations = results
         var userLocation: Student?
         
-        if let lastestLocation = userLocations.popLast() {
-            userLocation = Student(dictionary: lastestLocation)
+        if let currentLcation = userLocations.popLast() {
+            userLocation = Student(dictionary: currentLcation)
         }
         
         return userLocation
