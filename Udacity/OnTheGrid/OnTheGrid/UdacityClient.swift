@@ -16,7 +16,7 @@ class UdacityClient: NSObject {
     var email: String? = nil
     var password: String? = nil
     
-    override init() {
+    private override init() {
         super.init()
     }
     
