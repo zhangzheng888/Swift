@@ -141,4 +141,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: Actions
     
+    @IBAction func addPressed(_ sender:Any) {
+        
+        if userLocation.objectId != nil {
+            print("User location is not empty")
+        }
+        
+        let addLocation = storyboard?.instantiateInitialViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
+        self.navigationController?.pushViewController(AddLocationViewController, animated: true)
+    }
+    
 }
