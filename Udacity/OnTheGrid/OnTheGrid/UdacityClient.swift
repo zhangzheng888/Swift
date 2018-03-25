@@ -193,13 +193,6 @@ class UdacityClient: NSObject {
         components.host = Component.ApiHost
         components.path = Component.ApiPath + (withPathExtension ?? "")
         
-//        components.queryItems = [URLQueryItem]()
-        
-//        for (key, value) in parameters {
-//            let queryItem = URLQueryItem(name: key, value: "\(value)")
-//            components.queryItems!.append(queryItem)
-//        }
-        
         return components.url!
     }
     
