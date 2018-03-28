@@ -434,6 +434,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c9G-0x-lY1"/>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="c1M-7E-PDa" id="eiP-fD-Xqo"/>
+                        <outlet property="detailTextfield" destination="DsC-Jh-DhZ" id="hWO-Qn-kRE"/>
+                        <outlet property="finishButton" destination="lYK-Qg-qNt" id="feY-ED-TFy"/>
+                        <outlet property="mapView" destination="KOq-5z-u1G" id="x31-w7-57N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WEm-A3-Fvo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="4ZL-t8-hs5"/>
