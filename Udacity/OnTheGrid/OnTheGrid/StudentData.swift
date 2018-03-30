@@ -18,7 +18,7 @@ class StudentData{
     
     // MARK: - Properties
     
-    var students = [Student]()
+    var studentLocations = [Student]()
     
     private init() {}
 }
