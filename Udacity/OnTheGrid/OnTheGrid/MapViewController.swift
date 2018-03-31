@@ -13,7 +13,6 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: Properties
-//    let activityIndicator = UIActivityIndicatorView()
     
     @IBOutlet weak var mapView: MKMapView!
     var annotations = [MKPointAnnotation]()
@@ -126,8 +125,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
-    
-    
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -141,14 +138,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: Actions
     
-    @IBAction func addPressed(_ sender:Any) {
+    @IBAction func addPressed(_ sender: Any) {
         
-        if userLocation.objectId != nil {
+        guard userLocation.objectId != nil else {
             print("User location is not empty")
+            return
         }
         
-        let addLocation = storyboard?.instantiateInitialViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
-        self.navigationController?.pushViewController(AddLocationViewController, animated: true)
+        guard let addLocation: AddLocationViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as? AddLocationViewController else {
+            print("Add Location View Controller does not exist")
+            return
+        }
+        
+        self.present(addLocation, animated: true, completion: nil)
+        
     }
     
+    @IBAction func refreshPressed(_ sender: Any) {
+        print("refreshPressed!")
+        ParseClient.sharedInstance().getStudentLocations({(success, result, error) in performUIUpdatesOnMain {
+            
+            if success {
+                self.reloadMapView()
+            } else {
+                print("Refresh did not work")
+                }
+            }
+        })
+    }
 }
