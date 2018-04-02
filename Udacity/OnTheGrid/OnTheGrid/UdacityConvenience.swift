@@ -6,7 +6,6 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UdacityClient {
@@ -45,6 +44,17 @@ extension UdacityClient {
     
     // MARK: Logout Methods
     
+    func logoutFromApplication(completionHandlerForLogout: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+        
+        let _ = taskForDELETEMethod(Method.Session, completionHandlerForDELETE: {(result, error) in
+            
+            if let error = error {
+                completionHandlerForLogout(false, NSError(domain: "logoutSession Error", code: 1, userInfo: [NSLocalizedDescriptionKey: "Your request returned an error: \(error)"]))
+            } else {
+                completionHandlerForLogout(true, nil)
+            }
+        })
+    }
     // MARK: Retrive User Data
     
     func getUdacityStudentData(completionHandlerForUdacityStudentData: @escaping (_ success: Bool, _ error: NSError?) -> Void) {

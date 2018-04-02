@@ -6,8 +6,6 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
-
 struct Student {
     
     // MARK: Properties

@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +41,11 @@ class LoginViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        usernameTextField.text = ""
+        passwordTextField.text = ""
     }
     
     // MARK: Actions
@@ -56,7 +62,7 @@ class LoginViewController: UIViewController {
             email = usernameTextField.text!
             password = passwordTextField.text!
             
-            UdacityClient.sharedInstance().authenticateWithViewController(self, email!, password!) { (success, error) in
+            UdacityClient.sharedInstance.authenticateWithViewController(self, email!, password!) { (success, error) in
                 
                 performUIUpdatesOnMain {
                     if success {
@@ -75,10 +81,11 @@ class LoginViewController: UIViewController {
     
     // MARK: Sign Up
     @IBAction func signUpPressed() {
-    
-        userDidTapView(self)
-        
-        debugTextLabel.text = "Sign Up button pressed"
+        guard let link = URL(string:UdacityClient.Component.SignUp) else {
+            debugTextLabel.text = "Invalid Sign-Up Link"
+            return
+        }
+        UIApplication.shared.open(link)
     }
     
     // MARK: Complete Login

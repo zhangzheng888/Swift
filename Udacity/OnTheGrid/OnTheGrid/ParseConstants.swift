@@ -6,7 +6,7 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension ParseClient {
     
@@ -34,6 +34,18 @@ extension ParseClient {
         
         static let StudentLocation = "/classes/StudentLocation"
     
+    }
+    
+    // MARK: JSONBodyKeys
+    struct JSONBodyKeys {
+        static let FirstName = "firstName"
+        static let LastName = "lastName"
+        static let Latitude = "latitude"
+        static let Longitude = "longitude"
+        static let MediaURL = "mediaURL"
+        static let ObjectID = "objectId"
+        static let UniqueKey = "uniqueKey"
+        static let MapString = "mapString"
     }
     
     // MARK: JSONResponseKeys

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
-
 public var uniqueKey: String = ""
 
 var userLocation = Student(dictionary: [:])
@@ -21,4 +19,5 @@ class StudentData{
     var studentLocations = [Student]()
     
     private init() {}
+    
 }

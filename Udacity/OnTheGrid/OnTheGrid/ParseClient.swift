@@ -6,7 +6,7 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class ParseClient: NSObject {
     
@@ -16,10 +16,10 @@ class ParseClient: NSObject {
     var locations: [[String:AnyObject]]? = nil
     
     // MARK: Initialization
-//
-//    override init() {
-//        super.init()
-//    }
+
+    private override init() {
+        super.init()
+    }
 
     // MARK: GET
     

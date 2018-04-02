@@ -6,9 +6,12 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class UdacityClient: NSObject {
+    
+    // MARK: Shared Instance
+    static let sharedInstance = UdacityClient()
     
     // MARK: Properties
     var session = URLSession.shared
@@ -195,15 +198,4 @@ class UdacityClient: NSObject {
         
         return components.url!
     }
-    
-    
-    // MARK: Shared Instance
-    class func sharedInstance() -> UdacityClient {
-        
-        struct Singleton {
-            static var sharedInstance = UdacityClient()
-        }
-        return Singleton.sharedInstance
-    }
-
 }

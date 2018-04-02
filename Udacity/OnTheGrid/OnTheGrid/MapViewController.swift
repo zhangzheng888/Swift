@@ -5,12 +5,17 @@
 //  Created by Kevin Zhang on 3/18/18.
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+    
+    // MARK: Outlets
+    
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
     
     // MARK: Properties
     
@@ -18,10 +23,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var annotations = [MKPointAnnotation]()
     
     // MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UdacityClient.sharedInstance().getUdacityStudentData(completionHandlerForUdacityStudentData: {(success, error) in
+        UdacityClient.sharedInstance.getUdacityStudentData(completionHandlerForUdacityStudentData: {(success, error) in
             
             if success {
                 print("Udacity Public Data Retrieval successful")
@@ -165,5 +171,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             }
         })
+    }
+    
+    @IBAction func pressLogout(_ sender: Any) {
+        
+        UdacityClient.sharedInstance.logoutFromApplication(completionHandlerForLogout: {(success, error) in performUIUpdatesOnMain {
+            
+            if success {
+                print("Logout Success!")
+                
+            } else {
+                print("Cannot logout!")
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+            }
+        })
+        
     }
 }
