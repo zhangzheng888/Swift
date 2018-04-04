@@ -19,6 +19,8 @@ struct Student {
     var longitude: Double?
     var mapString: String?
     
+    // MARK: Initialization
+    
     init(dictionary: [String:AnyObject]) {
         firstName =  dictionary[ParseClient.JSONResponseKeys.FirstName] as? String
         lastName = dictionary[ParseClient.JSONResponseKeys.LastName] as? String
@@ -33,7 +35,6 @@ struct Student {
     // MARK: Helpers
     
     static func studentLocationsFromResults(_ results: [[String:AnyObject]]) -> [Student] {
-        
         var locations = [Student]()
         
         for eachLocation in results {
@@ -43,15 +44,12 @@ struct Student {
     }
     
     static func userLocationFromResults(_ results: [[String:AnyObject]]) -> Student? {
-        
         var userLocations = results
         var userLocation: Student?
         
         if let currentLcation = userLocations.popLast() {
             userLocation = Student(dictionary: currentLcation)
         }
-        
         return userLocation
-        
     }
 }
