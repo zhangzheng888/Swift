@@ -57,19 +57,18 @@ class LoginViewController: UIViewController {
         userDidTapView(self)
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty."
+            presentAlert("Error", "Username or Password Empty.", "Dismiss")
         } else {
-            setUIEnabled(false)
             email = usernameTextField.text!
             password = passwordTextField.text!
             UdacityClient.sharedInstance.authenticateWithViewController(self, email!, password!) { (success, error) in
-                
-                performUIUpdatesOnMain {
+            performUIUpdatesOnMain {
                     if success {
                         self.completeLogin()
                     } else {
                         self.displayError(error)
+                        self.presentAlert("Login Error", "Please check your login credentials", "Try Again")
                     }
-                    self.setUIEnabled(true)
                 }
             }
         }
@@ -103,21 +102,6 @@ class LoginViewController: UIViewController {
     
 private extension LoginViewController {
     
-    func setUIEnabled(_ enabled: Bool) {
-        usernameTextField.isEnabled = enabled
-        passwordTextField.isEnabled = enabled
-        loginButton.isEnabled = enabled
-        debugTextLabel.text = ""
-        debugTextLabel.isEnabled = enabled
-        
-        // adjust login button alpha
-        if enabled {
-            loginButton.alpha = 1.0
-        } else {
-            loginButton.alpha = 0.5
-        }
-    }
-    
     func displayError(_ errorString: String?) {
         if let errorString = errorString {
             performUIUpdatesOnMain() {
@@ -126,8 +110,6 @@ private extension LoginViewController {
         }
     }
 }
-
-// MARK: - LoginViewController: UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
     
@@ -178,13 +160,12 @@ private extension LoginViewController {
     // MARK: Network Availability
     
     func networkAvailable() {
-        
         reachability.whenReachable = { _ in
             print("Network reachable")
         }
         
         reachability.whenUnreachable = { _ in
-            self.presentAlert(UdacityClient.Alert.NoInternetTitle, UdacityClient.Alert.NoInternetMessage, UdacityClient.Alert.OK)
+            presentAlert("Network Error", "There is a problem with network connectivity", "OK")
         }
         
         do {
@@ -192,6 +173,16 @@ private extension LoginViewController {
         } catch {
             print("Unable to start notifier")
         }
+    }
+    
+    // MARK: Alert Controller
+    
+    private func presentAlert(_ title: String, _ message: String, _ action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(action, comment: "Default action"), style: .default, handler: {_ in
+            NSLog("The \"\(title)\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
