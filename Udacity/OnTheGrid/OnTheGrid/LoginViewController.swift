@@ -8,13 +8,14 @@
 
 import UIKit
 
-// MARK: - LoginViewController: UIViewController
+// MARK: LoginViewController: UIViewController
 
 class LoginViewController: UIViewController {
 
     // MARK: Properties
     
     var appDelegate: AppDelegate!
+    var reachability = Reachability()!
     var email: String?
     var password: String?
     
@@ -28,9 +29,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var debugTextLabel: UILabel!
 
     // MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.shared.delegate as! AppDelegate
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
 
     }
 
@@ -39,29 +43,24 @@ class LoginViewController: UIViewController {
         debugTextLabel.text = ""
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        networkAvailable()
         usernameTextField.text = ""
         passwordTextField.text = ""
     }
     
     // MARK: Actions
+    
     @IBAction func loginPressed(_ sender: AnyObject) {
         
         userDidTapView(self)
-        
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty."
-            
         } else {
             setUIEnabled(false)
-            
             email = usernameTextField.text!
             password = passwordTextField.text!
-            
             UdacityClient.sharedInstance.authenticateWithViewController(self, email!, password!) { (success, error) in
                 
                 performUIUpdatesOnMain {
@@ -70,16 +69,14 @@ class LoginViewController: UIViewController {
                     } else {
                         self.displayError(error)
                     }
-                    
                     self.setUIEnabled(true)
                 }
             }
-            
         }
-        
     }
     
     // MARK: Sign Up
+    
     @IBAction func signUpPressed() {
         guard let link = URL(string:UdacityClient.Component.SignUp) else {
             debugTextLabel.text = "Invalid Sign-Up Link"
@@ -89,6 +86,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: Complete Login
+    
     private func completeLogin() {
         debugTextLabel.text = ""
         let controller = storyboard?.instantiateViewController(withIdentifier: "MapNavigationalController") as! UITabBarController
@@ -147,9 +145,9 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - LoginViewController (Keyboard Notifications)
-
 private extension LoginViewController {
+    
+    // MARK: Keyboard Notifications
     
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
@@ -175,6 +173,25 @@ private extension LoginViewController {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
+    }
+    
+    // MARK: Network Availability
+    
+    func networkAvailable() {
+        
+        reachability.whenReachable = { _ in
+            print("Network reachable")
+        }
+        
+        reachability.whenUnreachable = { _ in
+            self.presentAlert(UdacityClient.Alert.NoInternetTitle, UdacityClient.Alert.NoInternetMessage, UdacityClient.Alert.OK)
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
 }
 
