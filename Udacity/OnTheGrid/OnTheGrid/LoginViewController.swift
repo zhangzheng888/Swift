@@ -8,8 +8,6 @@
 
 import UIKit
 
-// MARK: LoginViewController: UIViewController
-
 class LoginViewController: UIViewController {
 
     // MARK: Properties
@@ -18,7 +16,7 @@ class LoginViewController: UIViewController {
     var reachability = Reachability()!
     var email: String?
     var password: String?
-    
+
     // MARK: Outlets
     
     @IBOutlet weak var udacityImageView: UIImageView!
@@ -35,7 +33,6 @@ class LoginViewController: UIViewController {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         usernameTextField.delegate = self
         passwordTextField.delegate = self
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -50,7 +47,7 @@ class LoginViewController: UIViewController {
         passwordTextField.text = ""
     }
     
-    // MARK: Actions
+    // MARK: Login
     
     @IBAction func loginPressed(_ sender: AnyObject) {
         
@@ -97,9 +94,23 @@ class LoginViewController: UIViewController {
         resignIfFirstResponder(passwordTextField)
     }
 }
+
+extension UIViewController: UITextFieldDelegate {
     
-    // MARK: - LoginViewController (Configure UI)
+    // MARK: UITextFieldDelegate
     
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func resignIfFirstResponder(_ textField: UITextField) {
+        if textField.isFirstResponder {
+            textField.resignFirstResponder()
+        }
+    }
+}
+
 private extension LoginViewController {
     
     func displayError(_ errorString: String?) {
@@ -109,25 +120,34 @@ private extension LoginViewController {
             }
         }
     }
-}
-
-extension LoginViewController: UITextFieldDelegate {
     
-    // MARK: UITextFieldDelegate
+    // MARK: Alert Controller
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    private func presentAlert(_ title: String, _ message: String, _ action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(action, comment: "Default action"), style: .default, handler: {_ in
+            NSLog("The \"\(title)\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
-    private func resignIfFirstResponder(_ textField: UITextField) {
-        if textField.isFirstResponder {
-            textField.resignFirstResponder()
+    // MARK: Network Availability
+    
+    func networkAvailable() {
+        reachability.whenReachable = { _ in
+            print("Network reachable")
+        }
+        
+        reachability.whenUnreachable = { _ in
+            self.presentAlert("Network Error", "There is a problem with network connectivity", "OK")
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
         }
     }
-}
-
-private extension LoginViewController {
     
     // MARK: Keyboard Notifications
     
@@ -155,34 +175,6 @@ private extension LoginViewController {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
-    }
-    
-    // MARK: Network Availability
-    
-    func networkAvailable() {
-        reachability.whenReachable = { _ in
-            print("Network reachable")
-        }
-        
-        reachability.whenUnreachable = { _ in
-            presentAlert("Network Error", "There is a problem with network connectivity", "OK")
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
-    }
-    
-    // MARK: Alert Controller
-    
-    private func presentAlert(_ title: String, _ message: String, _ action: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString(action, comment: "Default action"), style: .default, handler: {_ in
-            NSLog("The \"\(title)\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
     }
 }
 
