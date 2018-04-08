@@ -10,9 +10,13 @@ import UIKit
 
 class ParseClient: NSObject {
     
+    // MARK: Shared Instance
+    static var sharedInstance = ParseClient()
+    
     // MARK: Properties
     var session = URLSession.shared
     
+    typealias requestCompletionHandler = (_ result: AnyObject?, _ error:NSError?) -> Void
     var locations: [[String:AnyObject]]? = nil
     
     // MARK: Initialization
@@ -23,7 +27,7 @@ class ParseClient: NSObject {
 
     // MARK: GET
     
-    func taskForGETMethod(_ method: String,  parameters: [String:AnyObject], completionHandlerForGET: @escaping (_ result: AnyObject?, _ error:NSError?) -> Void) -> URLSessionDataTask {
+    func taskForGETMethod(_ method: String,  parameters: [String:AnyObject], completionHandlerForGET: @escaping requestCompletionHandler) -> URLSessionDataTask {
         
         let url = self.parseURLFromParameters(parameters: parameters, withPathExtension: method)
         
@@ -62,9 +66,9 @@ class ParseClient: NSObject {
     }
     
     // MARK: PUT
-    func taskForPUTMethod(_ method: String, _ jsonBody: String, completionHandlerForPUT: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) ->
+    
+    func taskForPUTMethod(_ method: String, _ jsonBody: String, completionHandlerForPUT: @escaping requestCompletionHandler) ->
         URLSessionTask {
-            
             let request = NSMutableURLRequest(url: parseURLFromParameters(withPathExtension: method))
             request.httpMethod = "POST"
             request.addValue(Constants.ApplicationID, forHTTPHeaderField: ParameterKeys.ApplicationID)
@@ -103,7 +107,8 @@ class ParseClient: NSObject {
     }
     
     // MARK: POST
-    func taskForPOSTMethod(_ method: String, jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    
+    func taskForPOSTMethod(_ method: String, jsonBody: String, completionHandlerForPOST: @escaping requestCompletionHandler) -> URLSessionDataTask {
         
         let request = NSMutableURLRequest(url: self.parseURLFromParameters(parameters: nil, withPathExtension: method))
         
@@ -146,7 +151,7 @@ class ParseClient: NSObject {
     // MARK: HELPERS
     
     // given raw JSON, return a usable Foundation object
-    private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
+    private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: requestCompletionHandler) {
         
         var parsedResult: AnyObject! = nil
         do {
@@ -177,27 +182,14 @@ class ParseClient: NSObject {
             let queryItem = URLQueryItem(name: key, value: "\(value)")
             components.queryItems!.append(queryItem)
         }
-        
         return components.url!
     }
     
     private func parseURLFromParameters(withPathExtension: String? = nil) -> URL {
-        
         var components = URLComponents()
         components.scheme = ParseClient.Constants.APIScheme
         components.host = ParseClient.Constants.APIHost
         components.path = ParseClient.Constants.APIPath + "/" + (withPathExtension ?? "")
-        
         return components.url!
-    }
-    
-    // MARK: Shared Instance
-    
-    class func sharedInstance() -> ParseClient {
-        
-        struct Singleton {
-            static var sharedInstance = ParseClient()
-        }
-        return Singleton.sharedInstance
     }
 }
