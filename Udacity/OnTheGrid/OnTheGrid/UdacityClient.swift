@@ -11,11 +11,12 @@ import UIKit
 class UdacityClient: NSObject {
     
     // MARK: Shared Instance
+    
     static let sharedInstance = UdacityClient()
     
     // MARK: Properties
-    var session = URLSession.shared
     
+    var session = URLSession.shared
     var email: String? = nil
     var password: String? = nil
     
@@ -24,8 +25,8 @@ class UdacityClient: NSObject {
     }
     
     // MARK: GET
-    func taskForGETMethod(_ method: String, completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
-        
+    
+    func taskForGETMethod(_ method: String, completionHandlerForGET: @escaping requestMethodCompletionHandler) -> URLSessionDataTask {
         var request = NSMutableURLRequest(url: udacityURLFromParameters(withPathExtension: method))
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
@@ -55,16 +56,15 @@ class UdacityClient: NSObject {
             }
             
             self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
-            
         })
         
         task.resume()
-        
         return task
     }
     
     // MARK: POST
-    func taskForPOSTMethod(_ method: String, jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    
+    func taskForPOSTMethod(_ method: String, jsonBody: String, completionHandlerForPOST: @escaping requestMethodCompletionHandler) -> URLSessionDataTask {
         
         // 2/3. Build the URL, Configure the request */
         let request = NSMutableURLRequest(url: udacityURLFromParameters(withPathExtension: method))
@@ -107,13 +107,12 @@ class UdacityClient: NSObject {
         
         // Start the request
         task.resume()
-        
         return task
     }
     
     // MARK: DELETE
-    func taskForDELETEMethod (_ method: String, completionHandlerForDELETE: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionTask {
-        
+    
+    func taskForDELETEMethod (_ method: String, completionHandlerForDELETE: @escaping requestMethodCompletionHandler) -> URLSessionTask {
         let request = NSMutableURLRequest(url: udacityURLFromParameters(withPathExtension: method))
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -157,12 +156,12 @@ class UdacityClient: NSObject {
         
         // Start the request
         task.resume()
-        
         return task
     }
     
     // MARK: Helpers
     // substitute the key for the value that is contained within the method name
+    
     func substituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
         if method.range(of: "{\(key)}") != nil {
             return method.replacingOccurrences(of: "{\(key)}", with: value)
@@ -172,8 +171,8 @@ class UdacityClient: NSObject {
     }
     
     // given raw JSON, return a usable Foundation object
+    
     private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
-        
         let range = Range(5..<data.count)
         let newData = data.subdata(in: range) /* subset response data! */
         
@@ -184,18 +183,16 @@ class UdacityClient: NSObject {
             let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
             completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))
         }
-        
         completionHandlerForConvertData(parsedResult, nil)
     }
     
     // Create a URL from parameters
+    
     private func udacityURLFromParameters(withPathExtension: String? = nil) -> URL {
-        
         var components = URLComponents()
         components.scheme = Component.ApiScheme
         components.host = Component.ApiHost
         components.path = Component.ApiPath + (withPathExtension ?? "")
-        
         return components.url!
     }
 }
