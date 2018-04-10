@@ -70,7 +70,7 @@ class ParseClient: NSObject {
     func taskForPUTMethod(_ method: String, _ jsonBody: String, completionHandlerForPUT: @escaping requestCompletionHandler) ->
         URLSessionTask {
             let request = NSMutableURLRequest(url: parseURLFromParameters(withPathExtension: method))
-            request.httpMethod = "POST"
+            request.httpMethod = "PUT"
             request.addValue(Constants.ApplicationID, forHTTPHeaderField: ParameterKeys.ApplicationID)
             request.addValue(Constants.APIKey, forHTTPHeaderField: ParameterKeys.APIKey)
             request.addValue(Constants.JSONApplication, forHTTPHeaderField: ParameterKeys.ContentType)
