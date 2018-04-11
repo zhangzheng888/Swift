@@ -10,34 +10,23 @@ import UIKit
 
 extension ParseClient {
     
-    typealias getLocationSuccessCompletionHandler = (_ success: Bool, _ result: Student?, _ error: String?) -> Void
+    typealias getLocationCompletionHandler = (_ success: Bool, _ result: Student?, _ error: String?) -> Void
     typealias getLocationsCompletionHandler = (_ success: Bool, _ students: [Student]?, _ error: String?) -> Void
-    typealias clientSuccessCompletionHandler = (_ success: Bool, _ error: Error?) -> Void
+    typealias clientCompletionHandler = (_ success: Bool, _ error: Error?) -> Void
     
     enum ClientError: Error {
-        case errorWith(description:String)
-        case parseData
+        case request(description: String)
+        case parse
     }
     
     // MARK: GET Convenience
     
-    func getStudentLocation(_ completionHandlerForStudentLocation: @escaping getLocationSuccessCompletionHandler) {
+    func getStudentLocation(_ completionHandlerForStudentLocation: @escaping getLocationCompletionHandler) {
+        
         let parameters = [ParameterKeys.Where: "{\"\(ParameterKeys.UniqueKey)\":\"" + "\(uniqueKey)" + "\"}"] as [String:AnyObject]
         
         let _ = taskForGETMethod(Method.StudentLocation, parameters: parameters, completionHandlerForGET: {(result, error) in
-//            if let error = error {
-//                print(error)
-//                completionHandlerForStudentLocation(false, nil, "Get User Location Failed.")
-//            } else {
-//                 guard let result = result?["results"] as? [[String:AnyObject]], !result.isEmpty else {
-//                    print("User Location not found!")
-//                    return
-//                }
-//                if let location = Student.userLocationFromResults(result) {
-//                    userLocation = location
-//                    completionHandlerForStudentLocation(true, userLocation, nil)
-//                }
-//            }
+
             if let error = error {
                 print(error)
                 completionHandlerForStudentLocation(false, nil, "Get User Location Failed.")
@@ -48,12 +37,13 @@ extension ParseClient {
                 completionHandlerForStudentLocation(true, userLocation, nil)
             } else {
                 print("User Location not found!")
-                completionHandlerForStudentLocation(false, nil, ClientError.parseData.localizedDescription)
+                completionHandlerForStudentLocation(false, nil, ClientError.parse.localizedDescription)
             }
         })
     }
 
     func getStudentLocations(_ completionHandlerForStudentLocations: @escaping getLocationsCompletionHandler) {
+        
         let parameters = [ParameterKeys.Limit: ParameterValues.LimitValue, ParameterKeys.Order: ParameterValues.LatestOrderValue] as [String: AnyObject]
         
         let _ = taskForGETMethod(Method.StudentLocation, parameters: parameters, completionHandlerForGET: {(result, error) in
@@ -67,30 +57,30 @@ extension ParseClient {
                 completionHandlerForStudentLocations(true, locations, nil)
             } else {
                 print("JSON Parse Error")
-                completionHandlerForStudentLocations(false, nil, ClientError.parseData.localizedDescription)
+                completionHandlerForStudentLocations(false, nil, ClientError.parse.localizedDescription)
             }
         })
     }
     
-    func postStudentLocation(_ mapString: String, _ mediaURL: String, _ latitude: Double, _ longitude: Double, _ completionhandlerForPOSTStudentLocation: @escaping clientSuccessCompletionHandler) {
+    func postStudentLocation(_ mapString: String, _ mediaURL: String, _ latitude: Double, _ longitude: Double, _ completionhandlerForPOSTStudentLocation: @escaping clientCompletionHandler) {
+        
         let jsonBody = "{\"\(JSONBodyKeys.UniqueKey)\": \"\(uniqueKey)\", \"\(JSONBodyKeys.FirstName)\": \"\(userLocation.firstName!)\", \"\(JSONBodyKeys.LastName)\": \"\(userLocation.lastName!)\",\"\(JSONBodyKeys.MapString)\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"\(JSONBodyKeys.Latitude)\": \(latitude), \"longitude\": \(longitude)}"
         
         let _ = taskForPOSTMethod(Method.StudentLocation, jsonBody: jsonBody, completionHandlerForPOST: {(result, error) in
             
             if let error = error {
-                completionhandlerForPOSTStudentLocation(false, NSError(domain: "POSTLocation error", code: 1, userInfo: [NSLocalizedDescriptionKey: "Your request returned an \(error)"]))
-            } else {
-                if let objectID = result?[JSONResponseKeys.ObjectID] as? String {
+                completionhandlerForPOSTStudentLocation(false, ClientError.request(description: error.localizedDescription))
+            } else if let objectID = result?[JSONResponseKeys.ObjectID] as? String {
                     userLocation.objectId = objectID
                     completionhandlerForPOSTStudentLocation(true, nil)
-                } else {
-                    completionhandlerForPOSTStudentLocation(false, ClientError.parseData)
-                }
+            } else {
+                    completionhandlerForPOSTStudentLocation(false, ClientError.parse)
             }
         })
     }
     
-    func putStudentLocation(_ mapString: String, _ mediaURL: String, _ latitude: Double, _ longitude: Double, _ completionhandlerForPUTStudentLocation: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    func putStudentLocation(_ mapString: String, _ mediaURL: String, _ latitude: Double, _ longitude: Double, _ completionhandlerForPUTStudentLocation: @escaping clientCompletionHandler) {
+        
         let latitude = String(latitude)
         let longitude = String(longitude)
         
@@ -98,14 +88,12 @@ extension ParseClient {
         
         let _ = taskForPUTMethod("\(Method.StudentLocation)"+"/\(userLocation.objectId!)", jsonBody, completionHandlerForPUT: {(result, error) in
             if let error = error {
-                completionhandlerForPUTStudentLocation(false, ClientError.errorWith(description: error.localizedDescription))
+                completionhandlerForPUTStudentLocation(false, ClientError.request(description: error.localizedDescription))
+            } else if let objectID = result?[JSONResponseKeys.ObjectID] as? String {
+                userLocation.objectId = objectID
+                completionhandlerForPUTStudentLocation(true, nil)
             } else {
-                if let objectID = result?[JSONResponseKeys.ObjectID] as? String {
-                    userLocation.objectId = objectID
-                    completionhandlerForPUTStudentLocation(true, nil)
-                } else {
-                    completionhandlerForPUTStudentLocation(false, ClientError.parseData)
-                }
+                completionhandlerForPUTStudentLocation(false, ClientError.parse)
             }
         })
     }
