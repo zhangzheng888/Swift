@@ -6,7 +6,6 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UdacityClient {
@@ -27,6 +26,7 @@ extension UdacityClient {
     struct Method {
         static let StudentLocation = "/classes/StudentLocation"
         static let Session = "/session"
+        static let Users = "/users"
     }
     
     struct ParameterKeys {
@@ -53,5 +53,4 @@ extension UdacityClient {
         static let status = "status"
         static let error = "error"
     }
-    
 }
