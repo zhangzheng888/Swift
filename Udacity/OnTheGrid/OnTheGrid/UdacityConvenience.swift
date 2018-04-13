@@ -10,10 +10,11 @@ import UIKit
 
 extension UdacityClient {
     
+    typealias requestMethodCompletionHandler = (_ result: AnyObject?, _ error: NSError?) -> Void
+    
     // MARK: Authentication Methods
     
     func authenticateWithViewController(_ loginViewController: UIViewController, _ username: String, _ password: String, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
-        
         postSession(username, password) { (success, error) in
             if success {
                 completionHandlerForAuth(success, nil)
@@ -24,11 +25,8 @@ extension UdacityClient {
     }
     
     func postSession(_ username: String, _ password: String, completionHandlerForSession: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
-        
         let jsonBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
-        
         let _ = taskForPOSTMethod(Method.Session, jsonBody: jsonBody, completionHandlerForPOST: {(result, error) in
-            
             if let error = error {
                 completionHandlerForSession(false, NSError(domain: "postSession error", code: 1, userInfo: [NSLocalizedDescriptionKey: "The request to login returned the \(error)"]))
             } else {
@@ -45,9 +43,7 @@ extension UdacityClient {
     // MARK: Logout Methods
     
     func logoutFromApplication(completionHandlerForLogout: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
-        
         let _ = taskForDELETEMethod(Method.Session, completionHandlerForDELETE: {(result, error) in
-            
             if let error = error {
                 completionHandlerForLogout(false, NSError(domain: "logoutSession Error", code: 1, userInfo: [NSLocalizedDescriptionKey: "Your request returned an error: \(error)"]))
             } else {
@@ -58,18 +54,15 @@ extension UdacityClient {
     // MARK: Retrive User Data
     
     func getUdacityStudentData(completionHandlerForUdacityStudentData: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
-        
         let _ = taskForGETMethod("\(Method.Users)"+"/\(uniqueKey)", completionHandlerForGET: {(result, error) in
             if let error = error {
                 completionHandlerForUdacityStudentData(false, NSError(domain: "getUdacityStudentData error", code: 1, userInfo: [NSLocalizedDescriptionKey: "Your request returned an error: \(error)"]))
             }
             
             if let user = result?[ResponseKeys.user] as? [String:AnyObject], let firstName = user[ResponseKeys.firstName] as? String, let lastName = user[ResponseKeys.lastName] as? String {
-                
                 userLocation.firstName = firstName
                 userLocation.lastName = lastName
                 completionHandlerForUdacityStudentData(true, nil)
-                
             } else {
                 completionHandlerForUdacityStudentData(false, NSError(domain: "getUdacityStudentDat error", code: 1, userInfo: [NSLocalizedDescriptionKey: "You request returned an error: \(String(describing: error))"]))
             }
