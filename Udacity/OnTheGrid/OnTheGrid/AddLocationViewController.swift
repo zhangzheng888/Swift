@@ -21,19 +21,20 @@ class AddLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationTextfield.delegate = self
     }
     
     // MARK: Action
     
     @IBAction func cancelPressed(_ sender: Any){
-        self.dismiss(animated: true, completion: nil )
+        dismiss(animated: true, completion: nil )
     }
     
     @IBAction func findLocationPressed(_ sender: Any){
         userDidTapView(self)
 
         guard let text = locationTextfield.text, !text.isEmpty else {
-            print("Location text field is empty")
+            self.presentAlert("Error", "Location text field is empty", "OK")
             return
         }
         
@@ -42,37 +43,27 @@ class AddLocationViewController: UIViewController {
             return
         }
         findLocation.userLocationString = locationTextfield.text
-        self.present(findLocation, animated: true, completion: nil)
-        
+        present(findLocation, animated: true, completion: nil)
     }
     
     @IBAction func userDidTapView(_ sender: Any) {
         resignIfFirstResponder(locationTextfield)
     }
-    
 }
-
-// MARK: - AddLocationViewController: UITextFieldDelegate
-
-extension AddLocationViewController: UITextFieldDelegate {
-    
-    // MARK: UITextFieldDelegate
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    private func resignIfFirstResponder(_ textField: UITextField) {
-        if textField.isFirstResponder {
-            textField.resignFirstResponder()
-        }
-    }
-}
-
-// MARK: - AddLocationViewController (Keyboard Notifications)
 
 private extension AddLocationViewController {
+    
+    // MARK: Alert Controller
+    
+    private func presentAlert(_ title: String, _ message: String, _ action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(action, comment: "Default action"), style: .default, handler: {_ in
+            NSLog("The \"\(title)\" alert occured.")
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: Keyboard Notifications
     
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
