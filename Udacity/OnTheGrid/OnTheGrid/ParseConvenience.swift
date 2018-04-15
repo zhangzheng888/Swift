@@ -84,16 +84,13 @@ extension ParseClient {
         let latitude = String(latitude)
         let longitude = String(longitude)
         
-        let jsonBody = "{\"\(JSONBodyKeys.UniqueKey)\": \"\(uniqueKey)\",\"\(JSONBodyKeys.FirstName)\": \"\(userLocation.firstName!)\", \"\(JSONBodyKeys.LastName)\": \"\(userLocation.lastName!)\",\"\(JSONBodyKeys.MapString)\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"\(JSONBodyKeys.Latitude)\": \(latitude), \"longitude\": \(longitude)}"
+        let jsonBody = "{\"\(JSONBodyKeys.UniqueKey)\": \"\(userLocation.uniqueKey!)\",\"\(JSONBodyKeys.FirstName)\": \"\(userLocation.firstName!)\", \"\(JSONBodyKeys.LastName)\": \"\(userLocation.lastName!)\",\"\(JSONBodyKeys.MapString)\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"\(JSONBodyKeys.Latitude)\": \(latitude), \"longitude\": \(longitude)}"
         
         let _ = taskForPUTMethod("\(Method.StudentLocation)"+"/\(userLocation.objectId!)", jsonBody, completionHandlerForPUT: {(result, error) in
             if let error = error {
                 completionhandlerForPUTStudentLocation(false, ClientError.request(description: error.localizedDescription))
-            } else if let objectID = result?[JSONResponseKeys.ObjectID] as? String {
-                userLocation.objectId = objectID
-                completionhandlerForPUTStudentLocation(true, nil)
             } else {
-                completionhandlerForPUTStudentLocation(false, ClientError.parse)
+                completionhandlerForPUTStudentLocation(true, nil)
             }
         })
     }
