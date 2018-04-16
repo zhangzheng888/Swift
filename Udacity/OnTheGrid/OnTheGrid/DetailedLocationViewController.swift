@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailedLocationViewController: UIViewController, MKMapViewDelegate {
+class DetailedLocationViewController: UIViewController {
     
     // MARK: Properties
     
@@ -26,16 +26,81 @@ class DetailedLocationViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var finishButton: UIButton!
     
     // MARK: Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        detailTextfield.delegate = self
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        findLocation(userLocationString)
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func backPressed(_ sender: Any){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func finishPressed(_ sender: Any){
         
+        print(userLocation.objectId as Any)
+        userDidTapView(self)
+        guard let text = detailTextfield.text, !text.isEmpty else {
+            presentAlert("Error", "Location text field is empty", "OK")
+            return
+        }
+        userMediaURL = text
+        if userLocation.objectId == nil {
+            
+            ParseClient.sharedInstance.postStudentLocation(userLocationString, userMediaURL, userLatitude, userLongitude, {(success, error) in performUIUpdatesOnMain {
+                    if success {
+                        print("Post Location Success!")
+                        self.dismiss(animated: true, completion: nil )
+                        let controller = self.storyboard?.instantiateViewController(withIdentifier: "MapNavigationalController") as! UITabBarController
+                        self.present(controller, animated: true, completion: nil)
+                        
+                    } else {
+                        print("Post Location Unsuccessful.")
+                        self.dismiss(animated: true, completion: nil )
+                    }
+                }
+            })
+        } else {
+            
+            ParseClient.sharedInstance.putStudentLocation(userLocationString, userMediaURL, userLatitude, userLongitude, {(success, error) in performUIUpdatesOnMain {
+                    if success {
+                        print("Put Location Success!")
+                        let controller = self.storyboard?.instantiateViewController(withIdentifier: "MapNavigationalController") as! UITabBarController
+                        self.present(controller, animated: true, completion: nil)
+                    } else {
+                        print("Put Location Unsuccessful.")
+                        self.dismiss(animated: true, completion: nil )
+                    }
+                }
+            })
+        }
+    }
+    
+    @IBAction func userDidTapView(_ sender: Any) {
+        resignIfFirstResponder(detailTextfield)
+    }
+}
+
+extension DetailedLocationViewController: MKMapViewDelegate {
+
+    // MARK: Search Location
+    
+    private func findLocation(_ location: String?) {
         let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = userLocationString
+        request.naturalLanguageQuery = location
         
         let localSearch = MKLocalSearch(request: request)
         localSearch.start(completionHandler:{(response, error) in performUIUpdatesOnMain {
             
             if error != nil {
-                print("Cannot Find Location", "Cannot find location, please try again.", "OK")
+                self.presentAlert("Cannot Find Location", "Cannot find location, please try again.", "OK")
             }
             
             if let mapItems = response?.mapItems {
@@ -50,60 +115,9 @@ class DetailedLocationViewController: UIViewController, MKMapViewDelegate {
                     self.mapView.region = region
                 }
             }
-        }
-        })
+        }})
     }
     
-    // MARK: Actions
-    
-    @IBAction func backPressed(_ sender: Any){
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func finishPressed(_ sender: Any){
-        
-        print(userLocation.objectId as Any)
-        
-        userDidTapView(self)
-        
-        guard let text = detailTextfield.text, !text.isEmpty else {
-            print("Location text field is empty")
-            return
-        }
-        self.userMediaURL = text
-        
-        if userLocation.objectId == nil {
-            
-            ParseClient.sharedInstance().postStudentLocation(userLocationString, userMediaURL, userLatitude, userLongitude, {(success, error) in performUIUpdatesOnMain {
-                
-                if success {
-                    print("Post Location Success!")
-                    self.navigationController?.popToRootViewController(animated: true)
-                    
-                } else {
-                    print("Post Location Unsuccessful.")
-                }
-                }
-            })
-        } else {
-            
-            ParseClient.sharedInstance().putStudentLocation(userLocationString, userMediaURL, userLatitude, userLongitude, {(success, error) in performUIUpdatesOnMain {
-                if success {
-                    print("Put Location Success!")
-                    self.navigationController?.popToRootViewController(animated: true)
-                } else {
-                    print("Put Location Unsuccessful.")
-                }
-                }
-            })
-            
-        }
-    }
-    
-    @IBAction func userDidTapView(_ sender: Any) {
-        resignIfFirstResponder(detailTextfield)
-    }
-
     // MARK: MKMapViewDelegate Methods
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -115,59 +129,19 @@ class DetailedLocationViewController: UIViewController, MKMapViewDelegate {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
-        }
-        else {
+        } else {
             pinView!.annotation = annotation
         }
         return pinView
     }
-}
-
-// MARK: - DetailedLocationViewController: UITextFieldDelegate
-
-extension DetailedLocationViewController: UITextFieldDelegate {
     
-    // MARK: UITextFieldDelegate
+    // MARK: Alert Controller
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    private func resignIfFirstResponder(_ textField: UITextField) {
-        if textField.isFirstResponder {
-            textField.resignFirstResponder()
-        }
-    }
-}
-
-// MARK: - DetailedLocationViewController (Keyboard Notifications)
-
-private extension DetailedLocationViewController {
-    
-    func subscribeToKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    func unsubscribeToKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    @objc func keyboardWillShow(_ notification: NSNotification) {
-        if detailTextfield.isFirstResponder {
-            view.frame.origin.y = -getKeyboardHeight(notification)
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification: NSNotification) {
-        view.frame.origin.y = 0
-    }
-    
-    func getKeyboardHeight(_ notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.cgRectValue.height
+    private func presentAlert(_ title: String, _ message: String, _ action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(action, comment: "Default action"), style: .default, handler: {_ in
+            NSLog("The \"\(title)\" alert occured.")
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
