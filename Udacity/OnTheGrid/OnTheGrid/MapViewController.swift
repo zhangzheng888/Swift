@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController {
     
     // MARK: Outlets
     
@@ -21,12 +21,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     var annotations = [MKPointAnnotation]()
+    var reachability = Reachability()!
+    let loadingIndicator = UIActivityIndicatorView()
+    let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         UdacityClient.sharedInstance.getUdacityStudentData(completionHandlerForUdacityStudentData: {(success, error) in
             
             if success {
@@ -36,7 +38,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         })
         
-        ParseClient.sharedInstance().getStudentLocation({(success, result, error) in
+        ParseClient.sharedInstance.getStudentLocation({(success, result, error) in
             
             if success {
                 print("Parse Location data retrieval successful")
@@ -45,28 +47,80 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         })
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        networkAvailable()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        ParseClient.sharedInstance().getStudentLocations({(success, result, error) in performUIUpdatesOnMain {
+        presentLoadingAlert()
+        ParseClient.sharedInstance.getStudentLocations({(success, result, error) in performUIUpdatesOnMain {
             
             if success {
+                self.alert.dismiss(animated: true, completion: nil)
                 self.reloadMapView()
             }
-            
             if let _ = error {
-                print("Failed to download locations")
+                self.alert.dismiss(animated: true, completion: {() in
+                    self.presentAlert("Failed to download", "We've failed to find student's locations. Try again later", "OK")
+                })
             }
         }})
     }
     
-    func reloadMapView(){
+    // MARK: Actions
+    
+    @IBAction func addPressed(_ sender: Any) {
+        guard userLocation.objectId != nil else {
+            presentAlertWithCancel("", "User " + "\"\(userLocation.firstName!)" + " " + "\(userLocation.lastName!)\"" + " Has Already Posted a Student Location. Would You Like to Overwrite Their Location?" , "Overwrite")
+            return
+        }
         
+        guard let addLocation: AddLocationViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as? AddLocationViewController else {
+            print("Loading Error, Add Location View Controller does not exist")
+            return
+        }
+        self.present(addLocation, animated: true, completion: nil)
+    }
+    
+    @IBAction func refreshPressed(_ sender: Any) {
+        print("refreshPressed!")
+        ParseClient.sharedInstance.getStudentLocations({(success, result, error) in performUIUpdatesOnMain {
+            if success {
+                self.reloadMapView()
+            } else {
+                self.presentAlert("Failed to Load", "Unable to retrieve map information. Please check network connection", "OK")
+                }
+            }
+        })
+    }
+    
+    @IBAction func pressLogout(_ sender: Any) {
+        showIndicator()
+        UdacityClient.sharedInstance.logoutFromApplication(completionHandlerForLogout: {(success, error) in performUIUpdatesOnMain {
+            
+            if success {
+                print("Logout Success!")
+                self.dismissIndicator()
+                self.dismiss(animated: true, completion: nil)
+                
+            } else {
+                self.dismissIndicator()
+                self.presentAlert("Failed to Logout", "Unable to logout. Please check network connection", "OK")
+                return
+                }
+            }
+        })
+    }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    
+    // MARK: MapViewDelegate
+    
+    func reloadMapView(){
         if !annotations.isEmpty {
             mapView.removeAnnotations(annotations)
             annotations.removeAll()
@@ -114,7 +168,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // method in TableViewDataSource.
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
@@ -141,52 +194,74 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
-    // MARK: Actions
-    
-    @IBAction func addPressed(_ sender: Any) {
-        
-        guard userLocation.objectId != nil else {
-            print("User location is not empty")
-            return
-        }
-        
-        guard let addLocation: AddLocationViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as? AddLocationViewController else {
-            print("Add Location View Controller does not exist")
-            return
-        }
-        
-        self.present(addLocation, animated: true, completion: nil)
-        
+}
+
+private extension MapViewController {
+
+    // MARK: Alert Controller
+
+    private func presentAlert(_ title: String, _ message: String, _ action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(action, comment: "Default action"), style: .default, handler: {_ in
+            NSLog("The \"\(title)\" alert occured.")
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func refreshPressed(_ sender: Any) {
-        print("refreshPressed!")
-        ParseClient.sharedInstance().getStudentLocations({(success, result, error) in performUIUpdatesOnMain {
-            
-            if success {
-                self.reloadMapView()
-            } else {
-                print("Refresh did not work")
-                }
-            }
-        })
+    func networkAvailable() {
+        reachability.whenReachable = { _ in
+            print("Network reachable")
+        }
+        
+        reachability.whenUnreachable = { _ in
+            self.presentAlert("Network Error", "There is a problem with network connectivity", "OK")
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
     
-    @IBAction func pressLogout(_ sender: Any) {
-        
-        UdacityClient.sharedInstance.logoutFromApplication(completionHandlerForLogout: {(success, error) in performUIUpdatesOnMain {
+    // MARK: Alert Controller with Cancel
+
+    private func presentAlertWithCancel(_ title: String, _ message: String, _ action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(action, comment: "Default action"), style: .default, handler: {_ in
             
-            if success {
-                print("Logout Success!")
-                
-            } else {
-                print("Cannot logout!")
-                return
-            }
-            self.dismiss(animated: true, completion: nil)
-            }
-        })
+            let addLocation: AddLocationViewController = (self.storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as? AddLocationViewController)!
+            self.present(addLocation, animated: true, completion: nil)
+            NSLog("The \"\(title)\" alert occured.")
+        }))
         
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .default, handler: {_ in
+            NSLog("The \"\(title)\" alert occured.")
+        })
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: Activity Indicator
+    
+    private func presentLoadingAlert() {
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showIndicator() {
+        loadingIndicator.center = self.view.center
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(loadingIndicator)
+        loadingIndicator.startAnimating()
+    }
+    
+    func dismissIndicator() {
+        loadingIndicator.stopAnimating()
     }
 }
