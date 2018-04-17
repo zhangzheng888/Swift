@@ -52,12 +52,18 @@ class LoginViewController: UIViewController {
     @IBAction func loginPressed(_ sender: AnyObject) {
         
         userDidTapView(self)
+        
+        guard (reachability.connection != .none) else {
+            self.presentAlert("Network Error", "There is a problem with network connectivity", "OK")
+            return
+        }
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Username or Password Empty."
             presentAlert("Error", "Username or Password Empty.", "Dismiss")
         } else {
             email = usernameTextField.text!
             password = passwordTextField.text!
+            networkAvailable()
             UdacityClient.sharedInstance.authenticateWithViewController(self, email!, password!) { (success, error) in
             performUIUpdatesOnMain {
                     if success {
