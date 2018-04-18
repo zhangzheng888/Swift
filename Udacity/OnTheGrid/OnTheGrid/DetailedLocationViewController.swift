@@ -17,6 +17,7 @@ class DetailedLocationViewController: UIViewController {
     var userMediaURL: String!
     var userLongitude: Double!
     var userLatitude: Double!
+    let loadingIndicator = UIActivityIndicatorView()
     
     // MARK: Outlet
     
@@ -63,7 +64,7 @@ class DetailedLocationViewController: UIViewController {
                         
                     } else {
                         print("Post Location Unsuccessful.")
-                        self.dismiss(animated: true, completion: nil )
+                        self.presentAlert("Cannot Post Location", "Please try again.", "OK")
                     }
                 }
             })
@@ -76,7 +77,7 @@ class DetailedLocationViewController: UIViewController {
                         self.present(controller, animated: true, completion: nil)
                     } else {
                         print("Put Location Unsuccessful.")
-                        self.dismiss(animated: true, completion: nil )
+                        self.presentAlert("Cannot Post Location", "Please try again.", "OK")
                     }
                 }
             })
@@ -93,6 +94,7 @@ extension DetailedLocationViewController: MKMapViewDelegate {
     // MARK: Search Location
     
     private func findLocation(_ location: String?) {
+        showIndicator()
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = location
         
@@ -101,6 +103,7 @@ extension DetailedLocationViewController: MKMapViewDelegate {
             
             if error != nil {
                 self.presentAlert("Cannot Find Location", "Cannot find location, please try again.", "OK")
+                self.dismissIndicator()
             }
             
             if let mapItems = response?.mapItems {
@@ -113,9 +116,22 @@ extension DetailedLocationViewController: MKMapViewDelegate {
                     self.mapView.addAnnotation(annotation)
                     let region = MKCoordinateRegion(center: annotation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
                     self.mapView.region = region
+                    self.dismissIndicator()
                 }
             }
         }})
+    }
+    
+    func showIndicator() {
+        loadingIndicator.center = self.view.center
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(loadingIndicator)
+        loadingIndicator.startAnimating()
+    }
+    
+    func dismissIndicator() {
+        loadingIndicator.stopAnimating()
     }
     
     // MARK: MKMapViewDelegate Methods
