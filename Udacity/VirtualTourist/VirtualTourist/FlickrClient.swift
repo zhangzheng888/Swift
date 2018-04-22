@@ -6,21 +6,28 @@
 //  Copyright © 2018 Kevin Zhang. All rights reserved.
 //
 
-import Foundation
-
-import Foundation
+import UIKit
 
 class FlickrClient: NSObject {
+    
+    // MARK: Shared Instance
+    
+    static let sharedInstance = FlickrClient()
+    
     // MARK: Properties
+    
     var session = URLSession.shared
     
     // MARK: Init
-    override init() {
+    
+    private override init() {
         super.init()
     }
     
     // MARK: GET
+    
     func taskForGETMethod(_ method: String, parameters: [String : AnyObject], completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+        
         var parametersWithApiKey = parameters
         parametersWithApiKey[FlickrClient.ParameterKeys.Method] = method as AnyObject
         parametersWithApiKey[FlickrClient.ParameterKeys.Callback] = "1" as AnyObject
@@ -54,11 +61,11 @@ class FlickrClient: NSObject {
         }
         
         task.resume()
-        
         return task
     }
     
     // MARK: GET Image
+    
     func taskForGETImage(filePath: String, completionHandlerForImage: @escaping (_ imageData: Data?, _ error: NSError?) -> Void) -> URLSessionTask {
         let url = URL(string: filePath)!
         let request = URLRequest(url: url)
@@ -90,13 +97,14 @@ class FlickrClient: NSObject {
         }
         
         task.resume()
-        
         return task
     }
     
     
     // MARK: Helpers
+    
     func substituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
+        
         if method.range(of: "{\(key)}") != nil {
             return method.replacingOccurrences(of: "{\(key)}", with: value)
         } else {
@@ -118,6 +126,7 @@ class FlickrClient: NSObject {
     }
     
     private func flickrURLFromParameters(_ parameters: [String:AnyObject], withPathExtension: String? = nil) -> URL {
+        
         var components = URLComponents()
         components.scheme = FlickrClient.Constants.ApiScheme
         components.host = FlickrClient.Constants.ApiHost
@@ -128,16 +137,6 @@ class FlickrClient: NSObject {
             let queryItem = URLQueryItem(name: key, value: "\(value)")
             components.queryItems!.append(queryItem)
         }
-        
         return components.url!
     }
-    
-    // MARK: Shared Instance
-    class func sharedInstance() -> FlickrClient {
-        struct Singleton {
-            static var sharedInstance = FlickrClient()
-        }
-        return Singleton.sharedInstance
-    }
-    
 }
