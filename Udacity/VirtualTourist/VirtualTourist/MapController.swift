@@ -50,7 +50,7 @@ class MapPinsViewController: UIViewController {
     // MARK: Pin and Annotations
     func populateMap() {
         for pin in pins {
-            mapView.addAnnotation(pin)
+            mapView.addAnnotation(pin as! MKAnnotation)
         }
     }
     
