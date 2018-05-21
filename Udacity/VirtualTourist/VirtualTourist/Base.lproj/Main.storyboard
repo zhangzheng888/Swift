@@ -109,6 +109,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sRQ-uI-0kh"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="nYH-Dk-0E5" id="y83-jN-JXa"/>
+                        <outlet property="photosCollectionView" destination="dTB-yl-t1K" id="AXA-z8-R5C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Aj-ya-LA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
