@@ -56,7 +56,7 @@ class PhotosCollectionViewController: UIViewController {
     // MARK: Initializers
     func initMap() {
         mapView.delegate = self
-        mapView.addAnnotation(selectedPin!)
+        mapView.addAnnotation(selectedPin! as! MKAnnotation)
         mapView.centerCoordinate = selectedPin!.coordinate
         mapView.isZoomEnabled = false
         mapView.isScrollEnabled = false
@@ -65,7 +65,7 @@ class PhotosCollectionViewController: UIViewController {
     
     // MARK: Fetch Photos
     func loadPhotos() {
-        FlickrClient.sharedInstance().getLocationPhotos(pin: selectedPin!, latitude: selectedPin!.latitude, longitude: selectedPin!.longitude) { (_ result: [Photo]?, _ error: NSError?) in
+        FlickrClient.sharedInstance.getLocationPhotos(pin: selectedPin!, latitude: selectedPin!.latitude, longitude: selectedPin!.longitude) { (_ result: [Photo]?, _ error: NSError?) in
             self.photos = result!
             self.performUIUpdatesOnMain {
                 self.photosCollectionView.reloadData()
@@ -110,7 +110,7 @@ extension PhotosCollectionViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! PhotoViewCell
         let flickrPhoto = photos[indexPath.row]
-        let photoUrl = flickrPhoto.flickrUrl
+        let photoUrl = flickrPhoto.flickrURL
         cell.photo.image = UIImage(named: "placeholder")
         
         if let data = flickrPhoto.data {
@@ -119,7 +119,7 @@ extension PhotosCollectionViewController: UICollectionViewDelegate, UICollection
             cell.hideLoading()
         } else {
             cell.showLoading()
-            let _ = FlickrClient.sharedInstance().taskForGETImage(filePath: photoUrl!, completionHandlerForImage: { (imageData, error) in
+            let _ = FlickrClient.sharedInstance.taskForGETImage(filePath: photoUrl!, completionHandlerForImage: { (imageData, error) in
                 if let image = UIImage(data: imageData!) {
                     self.performUIUpdatesOnMain {
                         cell.hideLoading()
@@ -147,4 +147,5 @@ extension PhotosCollectionViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
+    }
 }
