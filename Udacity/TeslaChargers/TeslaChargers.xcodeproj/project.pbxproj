@@ -13,6 +13,8 @@
 		0A55ED8B20BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A55ED8920BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld */; };
 		0A55ED8D20BA2D3600E8BC1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A55ED8C20BA2D3600E8BC1E /* Assets.xcassets */; };
 		0A55ED9020BA2D3600E8BC1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A55ED8E20BA2D3600E8BC1E /* LaunchScreen.storyboard */; };
+		DEE65DBA20BA5EA60063ACAD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE65DB920BA5EA60063ACAD /* API.swift */; };
+		DEE65DBC20BA5ED20063ACAD /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE65DBB20BA5ED20063ACAD /* HTTP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0A55ED8C20BA2D3600E8BC1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A55ED8F20BA2D3600E8BC1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A55ED9120BA2D3600E8BC1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEE65DB920BA5EA60063ACAD /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		DEE65DBB20BA5ED20063ACAD /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		0A55ED8120BA2D3500E8BC1E /* TeslaChargers */ = {
 			isa = PBXGroup;
 			children = (
+				DEE65DB820BA5E8A0063ACAD /* API */,
+				DEE65DB620BA5E790063ACAD /* Model */,
 				0A55ED8220BA2D3500E8BC1E /* AppDelegate.swift */,
 				0A55ED8420BA2D3500E8BC1E /* ViewController.swift */,
 				0A55ED8620BA2D3500E8BC1E /* Main.storyboard */,
@@ -65,6 +71,30 @@
 				0A55ED8920BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld */,
 			);
 			path = TeslaChargers;
+			sourceTree = "<group>";
+		};
+		DEE65DB620BA5E790063ACAD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DEE65DB720BA5E820063ACAD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DEE65DB820BA5E8A0063ACAD /* API */ = {
+			isa = PBXGroup;
+			children = (
+				DEE65DB720BA5E820063ACAD /* Service */,
+				DEE65DB920BA5EA60063ACAD /* API.swift */,
+				DEE65DBB20BA5ED20063ACAD /* HTTP.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +168,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEE65DBC20BA5ED20063ACAD /* HTTP.swift in Sources */,
 				0A55ED8B20BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld in Sources */,
 				0A55ED8520BA2D3500E8BC1E /* ViewController.swift in Sources */,
+				DEE65DBA20BA5EA60063ACAD /* API.swift in Sources */,
 				0A55ED8320BA2D3500E8BC1E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
