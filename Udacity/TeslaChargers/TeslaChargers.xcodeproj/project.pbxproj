@@ -13,6 +13,13 @@
 		0A55ED8B20BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A55ED8920BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld */; };
 		0A55ED8D20BA2D3600E8BC1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A55ED8C20BA2D3600E8BC1E /* Assets.xcassets */; };
 		0A55ED9020BA2D3600E8BC1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A55ED8E20BA2D3600E8BC1E /* LaunchScreen.storyboard */; };
+		DE85696720BCB41700C56611 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85696620BCB41700C56611 /* JSONDecoder.swift */; };
+		DE85696920BCB47100C56611 /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85696820BCB47100C56611 /* JSONEncoder.swift */; };
+		DE85696C20BCBC1E00C56611 /* ChargersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85696B20BCBC1E00C56611 /* ChargersService.swift */; };
+		DE85697120BCE97300C56611 /* SuperChargerResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85697020BCE97300C56611 /* SuperChargerResource.swift */; };
+		DE85697320BCEA7600C56611 /* SuperChargerCollectionResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85697220BCEA7600C56611 /* SuperChargerCollectionResource.swift */; };
+		DEE65DBA20BA5EA60063ACAD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE65DB920BA5EA60063ACAD /* API.swift */; };
+		DEE65DBC20BA5ED20063ACAD /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE65DBB20BA5ED20063ACAD /* HTTP.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +31,13 @@
 		0A55ED8C20BA2D3600E8BC1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A55ED8F20BA2D3600E8BC1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A55ED9120BA2D3600E8BC1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE85696620BCB41700C56611 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
+		DE85696820BCB47100C56611 /* JSONEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEncoder.swift; sourceTree = "<group>"; };
+		DE85696B20BCBC1E00C56611 /* ChargersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargersService.swift; sourceTree = "<group>"; };
+		DE85697020BCE97300C56611 /* SuperChargerResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperChargerResource.swift; sourceTree = "<group>"; };
+		DE85697220BCEA7600C56611 /* SuperChargerCollectionResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperChargerCollectionResource.swift; sourceTree = "<group>"; };
+		DEE65DB920BA5EA60063ACAD /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		DEE65DBB20BA5ED20063ACAD /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,8 @@
 		0A55ED8120BA2D3500E8BC1E /* TeslaChargers */ = {
 			isa = PBXGroup;
 			children = (
+				DEE65DB820BA5E8A0063ACAD /* API */,
+				DEE65DB620BA5E790063ACAD /* Model */,
 				0A55ED8220BA2D3500E8BC1E /* AppDelegate.swift */,
 				0A55ED8420BA2D3500E8BC1E /* ViewController.swift */,
 				0A55ED8620BA2D3500E8BC1E /* Main.storyboard */,
@@ -65,6 +81,51 @@
 				0A55ED8920BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld */,
 			);
 			path = TeslaChargers;
+			sourceTree = "<group>";
+		};
+		DE85696A20BCBBFD00C56611 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DEE65DBB20BA5ED20063ACAD /* HTTP.swift */,
+				DE85696620BCB41700C56611 /* JSONDecoder.swift */,
+				DE85696820BCB47100C56611 /* JSONEncoder.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DE85696D20BCE94000C56611 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DE85697220BCEA7600C56611 /* SuperChargerCollectionResource.swift */,
+				DE85697020BCE97300C56611 /* SuperChargerResource.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DEE65DB620BA5E790063ACAD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DEE65DB720BA5E820063ACAD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DE85696B20BCBC1E00C56611 /* ChargersService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DEE65DB820BA5E8A0063ACAD /* API */ = {
+			isa = PBXGroup;
+			children = (
+				DEE65DB920BA5EA60063ACAD /* API.swift */,
+				DE85696D20BCE94000C56611 /* Resources */,
+				DEE65DB720BA5E820063ACAD /* Service */,
+				DE85696A20BCBBFD00C56611 /* Utilities */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +199,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE85697120BCE97300C56611 /* SuperChargerResource.swift in Sources */,
+				DE85696C20BCBC1E00C56611 /* ChargersService.swift in Sources */,
+				DE85696720BCB41700C56611 /* JSONDecoder.swift in Sources */,
+				DEE65DBC20BA5ED20063ACAD /* HTTP.swift in Sources */,
+				DE85696920BCB47100C56611 /* JSONEncoder.swift in Sources */,
 				0A55ED8B20BA2D3500E8BC1E /* TeslaChargers.xcdatamodeld in Sources */,
+				DE85697320BCEA7600C56611 /* SuperChargerCollectionResource.swift in Sources */,
 				0A55ED8520BA2D3500E8BC1E /* ViewController.swift in Sources */,
+				DEE65DBA20BA5EA60063ACAD /* API.swift in Sources */,
 				0A55ED8320BA2D3500E8BC1E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
