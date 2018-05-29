@@ -16,7 +16,7 @@ extension FlickrClient {
         static let ApiScheme = "https"
         static let ApiHost = "api.flickr.com"
         static let ApiPath = "/services/rest"
-        static let ApiKey = ""
+        static let ApiKey = "27eb89220464252551d67a46c6d02a66"
     }
     
     // MARK: Methods
@@ -26,11 +26,6 @@ extension FlickrClient {
         // MARK: Search
         
         static let Search = "flickr.photos.search"
-    }
-    
-    // MARK: Header Keys
-    
-    struct HeaderKeys {
     }
     
     // MARK: Parameter Keys
