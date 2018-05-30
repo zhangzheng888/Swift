@@ -22,9 +22,6 @@ extension FlickrClient {
     // MARK: Methods
     
     struct Methods {
-        
-        // MARK: Search
-        
         static let Search = "flickr.photos.search"
     }
     
@@ -41,7 +38,6 @@ extension FlickrClient {
     }
     
     struct URLKeys {
-        
         static let Id = "id"
     }
     
