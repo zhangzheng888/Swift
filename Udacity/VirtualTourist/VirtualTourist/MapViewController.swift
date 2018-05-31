@@ -9,7 +9,7 @@
 import MapKit
 import CoreData
 
-class MapPinsViewController: UIViewController {
+class MapViewController: UIViewController {
     
     // MARK: Attributes
     @IBOutlet weak var mapView: MKMapView!
@@ -76,7 +76,7 @@ class MapPinsViewController: UIViewController {
 }
 
 // MARK: MKMapViewDelegate
-extension MapPinsViewController: MKMapViewDelegate {
+extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
         
@@ -107,7 +107,7 @@ extension MapPinsViewController: MKMapViewDelegate {
 }
 
 // MARK: Long Press
-extension MapPinsViewController {
+extension MapViewController {
     func longPress(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state != UIGestureRecognizerState.began {
             return
